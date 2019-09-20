@@ -21,8 +21,6 @@ public class SHA1Util {
         if(StringUtils.isEmpty(psw)){
             return null;
         }else{
-            System.out.println("dasdsadsadda");
-            System.out.println("dsds");
             return DigestUtils.sha1DigestAsHex(psw);
         }
     }

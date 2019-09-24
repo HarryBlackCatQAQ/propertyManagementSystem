@@ -1,18 +1,20 @@
 package com.bnuz.propertyManagementSystem.service.impl;
 
-import com.bnuz.propertyManagementSystem.service.SpringSecurityService;
+import com.bnuz.propertyManagementSystem.service.SpringSecurityPasswordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
+ * SpringSecurityPassword加密服务
+ *
  * @Author: Harry
  * @Date: 2019-09-20 18:41
  * @Version 1.0
  */
 
-@Service("SpringSecurityServiceImpl")
-public class SpringSecurityServiceImpl implements SpringSecurityService {
+@Service("SpringSecurityPasswordServiceImpl")
+public class SpringSecurityPasswordServiceImpl implements SpringSecurityPasswordService {
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;

@@ -1,8 +1,8 @@
 package com.bnuz.propertyManagementSystem;
 
 import com.bnuz.propertyManagementSystem.dao.UserDao;
-import com.bnuz.propertyManagementSystem.model.User;
-import com.bnuz.propertyManagementSystem.service.SpringSecurityService;
+import com.bnuz.propertyManagementSystem.service.SpringSecurityPasswordService;
+import com.bnuz.propertyManagementSystem.util.RedisUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,31 +17,31 @@ public class PropertyManagementSystemApplicationTests {
     UserDao userDao;
 
     @Autowired
-    SpringSecurityService springSecurityService;
+    SpringSecurityPasswordService springSecurityPasswordService;
+
+    @Autowired
+    RedisUtil redisUtil;
 
     @Test
     public void contextLoads() {
-        User user = new User();
-        user.setUsername("123");
         String password = "123456";
-        String newPassword = springSecurityService.encodePassword(password);
+        String newPassword = springSecurityPasswordService.encodePassword(password);
 
 
         System.err.println(newPassword);
 
-        user.setPassword(newPassword);
 
-        user.setNickname("ttt");
-        user.setRole(0);
-
-//        userDao.insert(user);
-
-        User user1 = userDao.selectByPrimaryKey(2);
-        System.err.println(user1);
-
-        boolean flag1 = springSecurityService.matchesPassword(password,user1.getPassword());
-        boolean flag2 = springSecurityService.matchesPassword("123",user1.getPassword());
-        System.err.println(flag1 + " " + flag2);
+        String key = "token";
+        String a = springSecurityPasswordService.encodePassword(newPassword);
+        redisUtil.sSet(key,a);
+        redisUtil.sSetAndTime(key,20,newPassword,"3232");
+//        long a = redisUtil.sSet(key,newPassword,"harry");
+//        System.err.println(a);
+//
+//        boolean t1 = redisUtil.sHasKey(key,newPassword);
+//        boolean t2 = redisUtil.sHasKey(key,"123");
+//        boolean t3 = redisUtil.sHasKey(key,"harry6");
+//        System.err.println(t1 + " " + t2 + " " + t3);
 
     }
 

@@ -4,7 +4,7 @@ import com.bnuz.propertyManagementSystem.filter.springsecurity.JWTAuthentication
 import com.bnuz.propertyManagementSystem.filter.springsecurity.JWTAuthorizationFilter;
 import com.bnuz.propertyManagementSystem.filter.springsecurity.JWTLogoutFilter;
 import com.bnuz.propertyManagementSystem.filter.springsecurity.TokenClearLogoutHandler;
-import com.bnuz.propertyManagementSystem.springsecurity.impl.MyUserDetailsServiceImpl;
+import com.bnuz.propertyManagementSystem.service.springsecurity.impl.MyUserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;

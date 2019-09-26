@@ -108,16 +108,16 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
         JWTRedisService jwtRedisService = SpringUtil.getBean(JWTRedisService.class);
         if(!jwtRedisService.hasToken(username)){
-            log.error("redis中无该token:" + token);
+            log.warn("redis中无该token:" + token);
             return false;
         }
         else{
 
             String redisToken = (String)jwtRedisService.getToken(username);
             if(!token.equals(redisToken)){
-                log.error("redis中" + username + "的token和前端出来的token不一样");
-                log.error("redisToken:" + redisToken);
-                log.error("前端Toekn:" + token);
+                log.warn("redis中" + username + "的token和前端出来的token不一样");
+                log.warn("redisToken:" + redisToken);
+                log.warn("前端Toekn:" + token);
                 return false;
             }
         }

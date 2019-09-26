@@ -35,11 +35,8 @@ public class ValidateCodeController {
     @GetMapping("/code/image")
     public void createCode(HttpServletResponse response, HttpServletRequest request) throws IOException {
         HttpSession session = request.getSession();
-        System.err.println("sessionId:" + session.getId());
 
         ImageCode imageCode = validateCodeService.createImageCode();
-
-        System.err.println(imageCode.getCode());
 
         ImageIO.write(imageCode.getImage(),"JPEG",response.getOutputStream());//写到相应的输出流中 中间是格式
     }

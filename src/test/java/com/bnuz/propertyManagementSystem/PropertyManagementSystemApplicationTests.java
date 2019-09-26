@@ -1,7 +1,7 @@
 package com.bnuz.propertyManagementSystem;
 
 import com.bnuz.propertyManagementSystem.dao.UserDao;
-import com.bnuz.propertyManagementSystem.service.SpringSecurityPasswordService;
+import com.bnuz.propertyManagementSystem.service.springsecurity.SpringSecurityPasswordService;
 import com.bnuz.propertyManagementSystem.util.RedisUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;

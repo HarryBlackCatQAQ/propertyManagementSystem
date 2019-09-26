@@ -1,4 +1,4 @@
-package com.bnuz.propertyManagementSystem.service;
+package com.bnuz.propertyManagementSystem.service.springsecurity;
 
 public interface SpringSecurityPasswordService {
 

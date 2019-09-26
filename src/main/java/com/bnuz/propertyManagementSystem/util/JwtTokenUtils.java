@@ -28,7 +28,7 @@ public class JwtTokenUtils {
     private static final String SECRET = "djasid3934*&^^&)7!-dasd2odax_VongHoWing";
     private static final String ISS = "echisan";
 
-    //时间使用JwtDate管理
+    // 时间使用JwtDate管理
     // 过期时间是3600秒，既是1个小时
     private static final int EXPIRATION = 1;
     // 选择了记住我之后的过期时间为7天
@@ -160,13 +160,5 @@ public class JwtTokenUtils {
         }
 
         return claims;
-    }
-
-
-    public static void main(String[] args) {
-        String token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3ODkiLCJpc3MiOiJlY2hpc2FuIiwiZXhwIjoxNTY5MjE4NTc4LCJpYXQiOjE1NjkyMTQ5NzgsInJvbCI6IlJPTEVfMiBST0xFXzEgUk9MRV8wIn0._VAbatryTqnQ6MwfvXZRvBA_vJIazkcKJf5yYnMTyegJLG4iGNKID5sZwH4928SQzkKBKzFJ8ZhSwSU4hOUMug";
-//        System.out.println(getTokenBody(token));
-//        System.out.println(getTokenBody(token).get("rol"));
-        System.out.println("1234".replace("13","23"));
     }
 }

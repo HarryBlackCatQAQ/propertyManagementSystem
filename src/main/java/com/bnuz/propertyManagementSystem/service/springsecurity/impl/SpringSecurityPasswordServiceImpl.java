@@ -1,6 +1,6 @@
-package com.bnuz.propertyManagementSystem.service.impl;
+package com.bnuz.propertyManagementSystem.service.springsecurity.impl;
 
-import com.bnuz.propertyManagementSystem.service.SpringSecurityPasswordService;
+import com.bnuz.propertyManagementSystem.service.springsecurity.SpringSecurityPasswordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

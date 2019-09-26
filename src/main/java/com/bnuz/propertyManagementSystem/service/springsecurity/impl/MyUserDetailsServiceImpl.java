@@ -1,8 +1,7 @@
-package com.bnuz.propertyManagementSystem.springsecurity.impl;
+package com.bnuz.propertyManagementSystem.service.springsecurity.impl;
 
 import com.bnuz.propertyManagementSystem.dao.UserDao;
 import com.bnuz.propertyManagementSystem.model.User;
-import com.bnuz.propertyManagementSystem.service.SpringSecurityPasswordService;
 import com.bnuz.propertyManagementSystem.springsecurity.JwtUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

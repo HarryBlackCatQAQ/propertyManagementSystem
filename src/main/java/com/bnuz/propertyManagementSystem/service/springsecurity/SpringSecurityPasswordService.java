@@ -1,6 +1,6 @@
-package com.bnuz.propertyManagementSystem.service;
+package com.bnuz.propertyManagementSystem.service.springsecurity;
 
-public interface SpringSecurityService {
+public interface SpringSecurityPasswordService {
 
     /**
      * 加密密码

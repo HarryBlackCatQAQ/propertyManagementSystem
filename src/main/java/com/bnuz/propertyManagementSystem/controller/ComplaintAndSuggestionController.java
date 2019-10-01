@@ -2,8 +2,6 @@ package com.bnuz.propertyManagementSystem.controller;
 
 import com.bnuz.propertyManagementSystem.model.ComplaintAndSuggestionSheet;
 import com.bnuz.propertyManagementSystem.model.Result;
-import com.bnuz.propertyManagementSystem.service.ComplaintAndSuggestionSheetService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**

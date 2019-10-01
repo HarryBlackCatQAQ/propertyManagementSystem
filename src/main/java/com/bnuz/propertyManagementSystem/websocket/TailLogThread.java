@@ -59,7 +59,7 @@ public class TailLogThread extends Thread {
         try {
             while ((line = reader.readLine()) != null) {
 //                System.out.println(line);
-                reportContent.append(line).append("\r\n");
+                reportContent.append(line).append("\n");
                 tempMill = getTime();
                 // 将实时日志通过WebSocket发送给客户端
                 if (lineCount >= READ_LINES || tempMill - startTime >= TIME_MILLS) {

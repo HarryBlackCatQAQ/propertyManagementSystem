@@ -15,7 +15,7 @@ public interface ResultStatusCode {
     /**
      * 失败
      */
-    public static final int ERROR = 20001;
+    public static final int ERROR = 40001;
     public static final String ERROR_MES = "失败";
 
 

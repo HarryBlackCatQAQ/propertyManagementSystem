@@ -45,8 +45,13 @@ public class JWTLogoutFilter extends LogoutFilter {
             // 检测到用户请求了退出当前登录,现在执行退出登录逻辑
             String token = request.getHeader("authorization").replace(JwtTokenUtils.TOKEN_PREFIX,"");
 
+            String username = "";
             log.info("token:" + token);
-            String username = (String)JwtTokenUtils.parsingToken(token).get("username");
+            try{
+                username = (String)JwtTokenUtils.parsingToken(token).get("username");
+            }catch (Exception e){
+                log.error(e.toString());
+            }
 
             JWTRedisService jwtRedisService = SpringUtil.getBean(JWTRedisService.class);
             boolean flag = jwtRedisService.delToken(username);

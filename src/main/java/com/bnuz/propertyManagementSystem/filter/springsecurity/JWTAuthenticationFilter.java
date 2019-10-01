@@ -1,5 +1,8 @@
 package com.bnuz.propertyManagementSystem.filter.springsecurity;
 
+import com.alibaba.fastjson.JSON;
+import com.bnuz.propertyManagementSystem.model.Result;
+import com.bnuz.propertyManagementSystem.model.ResultStatusCode;
 import com.bnuz.propertyManagementSystem.model.User;
 import com.bnuz.propertyManagementSystem.service.redis.JWTRedisService;
 import com.bnuz.propertyManagementSystem.util.JwtTokenUtils;
@@ -89,6 +92,10 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         // 按照jwt的规定，最后请求的格式应该是 `Bearer token`
         response.setHeader("token", token);
         response.setHeader("Access-Control-Expose-Headers", "token");
+
+        Result result = new Result(true, ResultStatusCode.OK,"login success");
+        String json = JSON.toJSONString(result);
+        response.getWriter().write(json);
     }
 
     /**
@@ -143,6 +150,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
      */
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
-        response.getWriter().write("authentication failed, reason: " + failed.getMessage());
+        Result result = new Result(false, ResultStatusCode.LOGINERROR,"username or password is wrong!");
+
+        String json = JSON.toJSONString(result);
+        response.getWriter().write(json);
     }
 }

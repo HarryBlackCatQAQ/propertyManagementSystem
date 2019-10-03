@@ -8,6 +8,7 @@ import com.bnuz.propertyManagementSystem.service.RegisteredService;
 import com.bnuz.propertyManagementSystem.service.springsecurity.SpringSecurityPasswordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @Author: Harry
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
  * @Version 1.0
  */
 
+@Transactional
 @Service("RegisteredServiceImpl")
 public class RegisteredServiceImpl implements RegisteredService {
 

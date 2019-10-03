@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.InvocationTargetException;
+
 /**
  * 自定义SpringSecurity UserDetailsService 获取用户数据、权限
  *
@@ -23,6 +25,7 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserDao userDao;
+
 
     /**
      * 从数据库获取数据和权限 并转化为JwtUser
@@ -40,6 +43,7 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
         if(user == null){
             return new JwtUser();
         }
+
         return new JwtUser(user);
     }
 

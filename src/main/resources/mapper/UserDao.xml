@@ -67,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user.id as user_id, user.userName as user_userName, user.nickName as user_nickName, 
+    user.id as user_id, user.userName as user_userName, user.nickName as user_nickName,
     user.`password` as `user_password`, user.`role` as `user_role`
   </sql>
   <select id="selectByExample" parameterType="com.bnuz.propertyManagementSystem.model.UserExample" resultMap="BaseResultMap">
@@ -109,7 +109,7 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.bnuz.propertyManagementSystem.model.User" useGeneratedKeys="true">
-    insert into user (userName, nickName, `password`, 
+    insert into user (userName, nickName, `password`,
       `role`)
     values (#{username,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{role,jdbcType=INTEGER})

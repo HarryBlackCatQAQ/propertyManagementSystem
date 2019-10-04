@@ -1,8 +1,13 @@
 package com.bnuz.propertyManagementSystem.controller;
 
+import com.bnuz.propertyManagementSystem.dao.UserDao;
+import com.bnuz.propertyManagementSystem.model.User;
+import com.bnuz.propertyManagementSystem.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -35,6 +40,17 @@ public class TestController {
     @GetMapping("/t3")
     public String t3(){
         return "t3";
+    }
+
+    @Autowired
+    UserService userService;
+    @Autowired
+    UserDao userDao;
+
+
+    @GetMapping("/page")
+    public Object page(int pageNum,int size){
+        return userService.getAllUser(pageNum,size).getData();
     }
 
     @GetMapping ("/login")

@@ -6,5 +6,8 @@
     <settings>
         <!-- 打印查询语句 -->
         <setting name="logImpl" value="SLF4J" />
+
+        <!-- 自动驼峰 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
 </configuration>

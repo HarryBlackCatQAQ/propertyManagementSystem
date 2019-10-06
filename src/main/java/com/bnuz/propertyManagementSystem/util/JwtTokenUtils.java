@@ -1,6 +1,7 @@
 package com.bnuz.propertyManagementSystem.util;
 
 import com.bnuz.propertyManagementSystem.springsecurity.JwtDate;
+import com.bnuz.propertyManagementSystem.springsecurity.JwtUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -40,7 +41,7 @@ public class JwtTokenUtils {
 
 
     // 默认创建token 可选记住我
-    public static String createToken(String username,String role, boolean isRememberMe) {
+    public static String createToken(JwtUser jwtUser, String role, boolean isRememberMe) {
         JwtDate jwtDate = new JwtDate();
         if(isRememberMe){
             jwtDate.setDays(EXPIRATION_REMEMBER);
@@ -49,18 +50,19 @@ public class JwtTokenUtils {
             jwtDate.setHours(EXPIRATION);
         }
 
-        return createTokenImpl(username,role,jwtDate);
+        return createTokenImpl(jwtUser,role,jwtDate);
     }
 
     //自定义过期时间 创建token
-    public static String createToken(String username,String role,JwtDate jwtDate) {
-        return createTokenImpl(username,role,jwtDate);
+    public static String createToken(JwtUser jwtUser,String role,JwtDate jwtDate) {
+        return createTokenImpl(jwtUser,role,jwtDate);
     }
 
-    private static String createTokenImpl(String username,String role,JwtDate jwtDate){
+    private static String createTokenImpl(JwtUser jwtUser,String role,JwtDate jwtDate){
 
         HashMap<String, Object> map = new HashMap<>();
         map.put(ROLE_CLAIMS, role);
+        map.put("user",jwtUser);
 
         Date now = new Date(System.currentTimeMillis());
         Date exp = jwtDate.getExp(now);
@@ -70,11 +72,12 @@ public class JwtTokenUtils {
                 .setClaims(map)
 
                 .setIssuer(ISS)
-                .setSubject(username)
+                .setSubject(jwtUser.getUsername())
                 .setIssuedAt(now)
                 .setExpiration(exp)
                 .compact();
     }
+
 
     // 从token中获取用户名
     private static String getUsername(String token){

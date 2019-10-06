@@ -93,7 +93,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.setHeader("token", token);
         response.setHeader("Access-Control-Expose-Headers", "token");
 
-        Result result = new Result(true, ResultStatusCode.OK,"login success");
+
+        Result result = new Result(true, ResultStatusCode.OK,"login success",jwtUser);
         String json = JSON.toJSONString(result);
         response.getWriter().write(json);
     }
@@ -121,7 +122,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         log.info("用户" + jwtUser.getUsername() + "权限:" + role);
 
         //生成token
-        String token = JwtTokenUtils.createToken(jwtUser.getUsername(), role,false);
+        String token = JwtTokenUtils.createToken(jwtUser, role,false);
 
         //将token存进redis
         saveTokenInRedis(jwtUser,token);

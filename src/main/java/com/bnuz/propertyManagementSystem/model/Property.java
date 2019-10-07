@@ -37,8 +37,7 @@ public class Property implements Serializable {
 
     private Long uid; //楼盘编号
 
-    @OneToMany
-    @JoinColumn(name = "uid")
+    @OneToMany(mappedBy = "property")
     private Set<Building> buildings; //楼盘楼栋集合
 
     private static final long serialVersionUID = 1L;

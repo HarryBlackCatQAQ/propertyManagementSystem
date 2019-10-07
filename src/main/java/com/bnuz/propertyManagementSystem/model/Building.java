@@ -40,10 +40,11 @@ public class Building implements Serializable {
 
     private Long propertyUid; //所属楼盘Uid
 
-//    @ManyToOne
-//    @JoinColumn(name = "uid", insertable = false ,updatable = false)
-//    @JsonBackReference
-//    private Property property; //所属楼盘
+    @ManyToOne
+    @JoinColumn(name = "propertyUid", referencedColumnName = "uid",
+        insertable = false ,updatable = false)
+    @JsonBackReference
+    private Property property; //所属楼盘
 
     private static final long serialVersionUID = 1L;
 

@@ -2,17 +2,12 @@ package com.bnuz.propertyManagementSystem.model;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import lombok.Data;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -20,6 +15,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 /**
  * property
  * @author hovees
+ * @date 2019-10-07 13:32
+ * 楼盘
  */
 
 @Data
@@ -38,7 +35,7 @@ public class Property implements Serializable {
     private Long uid; //楼盘编号
 
     @OneToMany(mappedBy = "property")
-    private Set<Building> buildings; //楼盘楼栋集合
+    private List<Building> buildings; //楼盘楼栋集合
 
     private static final long serialVersionUID = 1L;
 

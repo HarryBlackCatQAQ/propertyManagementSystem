@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,11 +11,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  * building
  * @author hovees
+ * @date 2019-10-07 13:32
+ * 楼栋
  */
 
 @Data
@@ -39,6 +41,8 @@ public class Building implements Serializable {
     private Long uid; //楼栋编号
 
     private Long propertyUid; //所属楼盘Uid
+
+    private String remark; //楼栋备注
 
     @ManyToOne
     @JoinColumn(name = "propertyUid", referencedColumnName = "uid",

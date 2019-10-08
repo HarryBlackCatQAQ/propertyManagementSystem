@@ -11,8 +11,40 @@ import com.bnuz.propertyManagementSystem.model.Result;
 
 public interface BuildingService {
 
-  public Result insert(Building building);
+  /**
+   * 新增楼栋
+   * @param building
+   * @return
+   */
+  Result insert(Building building);
 
-  public Result getById(Integer id);
+  /**
+   * 更新楼栋信息
+   * @param building
+   * @return
+   */
+  Result update(Building building);
+
+  /**
+   * 获取所有楼栋并分页
+   * @param pageNum
+   * @param pageSize
+   * @return
+   */
+  Result findAll(Integer pageNum, Integer pageSize);
+
+  /**
+   * 根据id获取楼栋
+   * @param id
+   * @return
+   */
+  Result getById(Integer id);
+
+  /**
+   * 根据uid获取楼栋
+   * @param uid
+   * @return
+   */
+  Result getByUid(Integer uid);
 
 }

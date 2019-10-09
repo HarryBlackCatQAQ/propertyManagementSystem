@@ -60,4 +60,12 @@ public class PropertyServiceImpl implements PropertyService {
     return new Result(true, ResultStatusCode.OK, "查询成功", property);
   }
 
+  @Override
+  public Result getByName(String propertyName) {
+    Property property = propertyDao.getByName(propertyName);
+    if(property != null) {
+      return new Result(false, ResultStatusCode.OK, "楼盘名字已存在");
+    }
+    return new Result(true, ResultStatusCode.OK, "楼盘名字可用");
+  }
 }

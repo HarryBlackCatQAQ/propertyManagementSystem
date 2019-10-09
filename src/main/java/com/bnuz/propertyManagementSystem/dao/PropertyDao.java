@@ -19,4 +19,6 @@ public interface PropertyDao extends JpaRepository<Property, Integer> {
 
   Property getByUid(Integer uid);
 
+  Property getByName(String propertyName);
+
 }

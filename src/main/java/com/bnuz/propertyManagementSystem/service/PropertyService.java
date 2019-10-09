@@ -47,4 +47,11 @@ public interface PropertyService {
    */
   Result getByUid(Integer uid);
 
+  /**
+   * 根据名字获取楼盘
+   * @param propertyName
+   * @return
+   */
+  Result getByName(String propertyName);
+
 }

@@ -50,4 +50,9 @@ public class PropertyController {
     return propertyService.getByUid(uid);
   }
 
+  @RequestMapping("checkPropertyName")
+  public Result checkPropertyName(@RequestParam String propertyName){
+    return propertyService.getByName(propertyName);
+  }
+
 }

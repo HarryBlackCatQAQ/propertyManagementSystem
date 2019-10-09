@@ -1,35 +1,44 @@
 package com.bnuz.propertyManagementSystem.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 
 /**
  * user
  * @author 
  */
+@ApiModel
 public class User implements Serializable {
     /**
      * userID
      */
+    @ApiModelProperty(value = "userID")
     private Integer id;
 
     /**
      * 用户账号
      */
+    @ApiModelProperty(value = "用户名",example = "777")
     private String username;
 
     /**
      * 用户名(昵称)
      */
+    @ApiModelProperty(value = "用户名(昵称)",example = "777")
     private String nickname;
 
     /**
      * 密码
      */
+    @ApiModelProperty(value = "密码",example = "777")
     private String password;
 
     /**
      * 用户角色
      */
+    @ApiModelProperty(value = "用户角色",example = "0")
     private Integer role;
 
     private static final long serialVersionUID = 1L;

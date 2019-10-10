@@ -1,5 +1,8 @@
 package com.bnuz.propertyManagementSystem.filter.springsecurity;
 
+import com.alibaba.fastjson.JSON;
+import com.bnuz.propertyManagementSystem.model.Result;
+import com.bnuz.propertyManagementSystem.model.ResultStatusCode;
 import com.bnuz.propertyManagementSystem.service.redis.JWTRedisService;
 import com.bnuz.propertyManagementSystem.util.JwtTokenUtils;
 import com.bnuz.propertyManagementSystem.util.SpringUtil;
@@ -57,7 +60,12 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         // 如果请求头中有token，则进行解析，并且设置认证信息
         boolean isExpiration = JwtTokenUtils.isExpiration(tokenHeader);
         log.info("token是否过期:" + isExpiration);
+
         if(isExpiration){
+
+            Result result = new Result(false, ResultStatusCode.TOEKNERROR,"token is error or overdue!");
+            String json = JSON.toJSONString(result);
+            response.getWriter().write(json);
             return;
         }
 

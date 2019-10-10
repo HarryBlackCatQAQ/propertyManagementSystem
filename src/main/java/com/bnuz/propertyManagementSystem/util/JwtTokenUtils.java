@@ -47,6 +47,7 @@ public class JwtTokenUtils {
             jwtDate.setDays(EXPIRATION_REMEMBER);
         }
         else{
+//            jwtDate.setSeconds(20);
             jwtDate.setHours(EXPIRATION);
         }
 

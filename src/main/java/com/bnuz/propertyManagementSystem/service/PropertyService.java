@@ -26,6 +26,13 @@ public interface PropertyService {
   Result update(Property property);
 
   /**
+   * 删除楼盘
+   * @param property
+   * @return
+   */
+  Result delete(Property property);
+
+  /**
    * 获取所有楼盘并分页
    * @param pageNum
    * @param pageSize

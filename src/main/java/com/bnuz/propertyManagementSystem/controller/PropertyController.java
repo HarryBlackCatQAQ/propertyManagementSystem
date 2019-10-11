@@ -2,10 +2,12 @@ package com.bnuz.propertyManagementSystem.controller;
 
 import com.bnuz.propertyManagementSystem.model.Property;
 import com.bnuz.propertyManagementSystem.model.Result;
+import com.bnuz.propertyManagementSystem.model.ResultStatusCode;
 import com.bnuz.propertyManagementSystem.service.PropertyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,6 +41,13 @@ public class PropertyController {
   public Result update(@RequestBody Property property) {
     return propertyService.update(property);
   }
+
+  @DeleteMapping(value = "delete")
+  @ApiOperation("删除楼盘接口")
+  public Result delete(@RequestBody Property property) {
+    return propertyService.delete(property);
+  }
+
 
   @GetMapping(value = "findAll")
   @ApiOperation("获取所有楼盘并分页接口")

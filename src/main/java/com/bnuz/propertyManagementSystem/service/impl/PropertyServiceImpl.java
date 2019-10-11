@@ -42,6 +42,14 @@ public class PropertyServiceImpl implements PropertyService {
   }
 
   @Override
+  public Result delete(Property property) {
+    synchronized (PropertyServiceImpl.class) {
+      propertyDao.delete(property);
+      return new Result(true, ResultStatusCode.OK, "删除成功");
+    }
+  }
+
+  @Override
   @Transactional(readOnly = true)
   public Result findAll(Integer pageNum, Integer pageSize) {
     Pageable pageable = PageRequest.of(pageNum,pageSize);

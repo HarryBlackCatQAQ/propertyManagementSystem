@@ -1,6 +1,7 @@
 package com.bnuz.propertyManagementSystem.service;
 
 import com.bnuz.propertyManagementSystem.model.Result;
+import com.bnuz.propertyManagementSystem.model.User;
 
 public interface UserService {
 
@@ -11,4 +12,26 @@ public interface UserService {
      * @return
      */
     public Result getAllUser(int pageNum,int size);
+
+    /**
+     * 根据id 删除User
+     * @param id
+     * @return
+     */
+    public Result delUser(int id);
+
+    /**
+     * 跟新User
+     * @param user
+     * @return
+     */
+    public Result updateUser(User user);
+
+    /**
+     * 根据类型查询User
+     * @param ttype
+     * @param content
+     * @return
+     */
+    public Result selectByType(String ttype,String content,int pageNum,int size);
 }

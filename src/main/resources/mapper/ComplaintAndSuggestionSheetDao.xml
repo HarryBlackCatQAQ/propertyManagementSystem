@@ -3,10 +3,14 @@
 <mapper namespace="com.bnuz.propertyManagementSystem.dao.ComplaintAndSuggestionSheetDao">
   <resultMap id="BaseResultMap" type="com.bnuz.propertyManagementSystem.model.ComplaintAndSuggestionSheet">
     <id column="complaint_and_suggestion_sheet_id" jdbcType="INTEGER" property="id" />
-    <result column="complaint_and_suggestion_sheet_proprietorId" jdbcType="INTEGER" property="proprietorid" />
+    <result column="complaint_and_suggestion_sheet_proprietorId" jdbcType="INTEGER" property="proprietorId" />
     <result column="complaint_and_suggestion_sheet_state" jdbcType="VARCHAR" property="state" />
-    <result column="complaint_and_suggestion_sheet_submitTime" jdbcType="TIMESTAMP" property="submittime" />
-    <result column="complaint_and_suggestion_sheet_processingTime" jdbcType="TIMESTAMP" property="processingtime" />
+    <result column="complaint_and_suggestion_sheet_submitTime" jdbcType="TIMESTAMP" property="submitTime" />
+    <result column="complaint_and_suggestion_sheet_processingTime" jdbcType="TIMESTAMP" property="processingTime" />
+    <result column="complaint_and_suggestion_sheet_userNickName" jdbcType="VARCHAR" property="userNickName" />
+    <result column="complaint_and_suggestion_sheet_sheetType" jdbcType="VARCHAR" property="sheetType" />
+    <result column="complaint_and_suggestion_sheet_message" jdbcType="VARCHAR" property="message" />
+    <result column="complaint_and_suggestion_sheet_title" jdbcType="VARCHAR" property="title" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +74,11 @@
     complaint_and_suggestion_sheet.id as complaint_and_suggestion_sheet_id, complaint_and_suggestion_sheet.proprietorId as complaint_and_suggestion_sheet_proprietorId, 
     complaint_and_suggestion_sheet.`state` as `complaint_and_suggestion_sheet_state`, 
     complaint_and_suggestion_sheet.submitTime as complaint_and_suggestion_sheet_submitTime, 
-    complaint_and_suggestion_sheet.processingTime as complaint_and_suggestion_sheet_processingTime
+    complaint_and_suggestion_sheet.processingTime as complaint_and_suggestion_sheet_processingTime, 
+    complaint_and_suggestion_sheet.userNickName as complaint_and_suggestion_sheet_userNickName, 
+    complaint_and_suggestion_sheet.sheetType as complaint_and_suggestion_sheet_sheetType, 
+    complaint_and_suggestion_sheet.message as complaint_and_suggestion_sheet_message, 
+    complaint_and_suggestion_sheet.title as complaint_and_suggestion_sheet_title
   </sql>
   <select id="selectByExample" parameterType="com.bnuz.propertyManagementSystem.model.ComplaintAndSuggestionSheetExample" resultMap="BaseResultMap">
     select
@@ -112,38 +120,64 @@
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.bnuz.propertyManagementSystem.model.ComplaintAndSuggestionSheet" useGeneratedKeys="true">
     insert into complaint_and_suggestion_sheet (proprietorId, `state`, submitTime, 
-      processingTime)
-    values (#{proprietorid,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR}, #{submittime,jdbcType=TIMESTAMP}, 
-      #{processingtime,jdbcType=TIMESTAMP})
+      processingTime, userNickName, sheetType, 
+      message, title)
+    values (#{proprietorId,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR}, #{submitTime,jdbcType=TIMESTAMP}, 
+      #{processingTime,jdbcType=TIMESTAMP}, #{userNickName,jdbcType=VARCHAR}, #{sheetType,jdbcType=VARCHAR}, 
+      #{message,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.bnuz.propertyManagementSystem.model.ComplaintAndSuggestionSheet" useGeneratedKeys="true">
     insert into complaint_and_suggestion_sheet
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="proprietorid != null">
+      <if test="proprietorId != null">
         proprietorId,
       </if>
       <if test="state != null">
         `state`,
       </if>
-      <if test="submittime != null">
+      <if test="submitTime != null">
         submitTime,
       </if>
-      <if test="processingtime != null">
+      <if test="processingTime != null">
         processingTime,
+      </if>
+      <if test="userNickName != null">
+        userNickName,
+      </if>
+      <if test="sheetType != null">
+        sheetType,
+      </if>
+      <if test="message != null">
+        message,
+      </if>
+      <if test="title != null">
+        title,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="proprietorid != null">
-        #{proprietorid,jdbcType=INTEGER},
+      <if test="proprietorId != null">
+        #{proprietorId,jdbcType=INTEGER},
       </if>
       <if test="state != null">
         #{state,jdbcType=VARCHAR},
       </if>
-      <if test="submittime != null">
-        #{submittime,jdbcType=TIMESTAMP},
+      <if test="submitTime != null">
+        #{submitTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="processingtime != null">
-        #{processingtime,jdbcType=TIMESTAMP},
+      <if test="processingTime != null">
+        #{processingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userNickName != null">
+        #{userNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="sheetType != null">
+        #{sheetType,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null">
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -159,17 +193,29 @@
       <if test="record.id != null">
         complaint_and_suggestion_sheet.id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.proprietorid != null">
-        complaint_and_suggestion_sheet.proprietorId = #{record.proprietorid,jdbcType=INTEGER},
+      <if test="record.proprietorId != null">
+        complaint_and_suggestion_sheet.proprietorId = #{record.proprietorId,jdbcType=INTEGER},
       </if>
       <if test="record.state != null">
         complaint_and_suggestion_sheet.`state` = #{record.state,jdbcType=VARCHAR},
       </if>
-      <if test="record.submittime != null">
-        complaint_and_suggestion_sheet.submitTime = #{record.submittime,jdbcType=TIMESTAMP},
+      <if test="record.submitTime != null">
+        complaint_and_suggestion_sheet.submitTime = #{record.submitTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.processingtime != null">
-        complaint_and_suggestion_sheet.processingTime = #{record.processingtime,jdbcType=TIMESTAMP},
+      <if test="record.processingTime != null">
+        complaint_and_suggestion_sheet.processingTime = #{record.processingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userNickName != null">
+        complaint_and_suggestion_sheet.userNickName = #{record.userNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sheetType != null">
+        complaint_and_suggestion_sheet.sheetType = #{record.sheetType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.message != null">
+        complaint_and_suggestion_sheet.message = #{record.message,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        complaint_and_suggestion_sheet.title = #{record.title,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -179,10 +225,14 @@
   <update id="updateByExample" parameterType="map">
     update complaint_and_suggestion_sheet complaint_and_suggestion_sheet
     set complaint_and_suggestion_sheet.id = #{record.id,jdbcType=INTEGER},
-      complaint_and_suggestion_sheet.proprietorId = #{record.proprietorid,jdbcType=INTEGER},
+      complaint_and_suggestion_sheet.proprietorId = #{record.proprietorId,jdbcType=INTEGER},
       complaint_and_suggestion_sheet.`state` = #{record.state,jdbcType=VARCHAR},
-      complaint_and_suggestion_sheet.submitTime = #{record.submittime,jdbcType=TIMESTAMP},
-      complaint_and_suggestion_sheet.processingTime = #{record.processingtime,jdbcType=TIMESTAMP}
+      complaint_and_suggestion_sheet.submitTime = #{record.submitTime,jdbcType=TIMESTAMP},
+      complaint_and_suggestion_sheet.processingTime = #{record.processingTime,jdbcType=TIMESTAMP},
+      complaint_and_suggestion_sheet.userNickName = #{record.userNickName,jdbcType=VARCHAR},
+      complaint_and_suggestion_sheet.sheetType = #{record.sheetType,jdbcType=VARCHAR},
+      complaint_and_suggestion_sheet.message = #{record.message,jdbcType=VARCHAR},
+      complaint_and_suggestion_sheet.title = #{record.title,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -190,27 +240,43 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.bnuz.propertyManagementSystem.model.ComplaintAndSuggestionSheet">
     update complaint_and_suggestion_sheet
     <set>
-      <if test="proprietorid != null">
-        proprietorId = #{proprietorid,jdbcType=INTEGER},
+      <if test="proprietorId != null">
+        proprietorId = #{proprietorId,jdbcType=INTEGER},
       </if>
       <if test="state != null">
         `state` = #{state,jdbcType=VARCHAR},
       </if>
-      <if test="submittime != null">
-        submitTime = #{submittime,jdbcType=TIMESTAMP},
+      <if test="submitTime != null">
+        submitTime = #{submitTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="processingtime != null">
-        processingTime = #{processingtime,jdbcType=TIMESTAMP},
+      <if test="processingTime != null">
+        processingTime = #{processingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userNickName != null">
+        userNickName = #{userNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="sheetType != null">
+        sheetType = #{sheetType,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null">
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.bnuz.propertyManagementSystem.model.ComplaintAndSuggestionSheet">
     update complaint_and_suggestion_sheet
-    set proprietorId = #{proprietorid,jdbcType=INTEGER},
+    set proprietorId = #{proprietorId,jdbcType=INTEGER},
       `state` = #{state,jdbcType=VARCHAR},
-      submitTime = #{submittime,jdbcType=TIMESTAMP},
-      processingTime = #{processingtime,jdbcType=TIMESTAMP}
+      submitTime = #{submitTime,jdbcType=TIMESTAMP},
+      processingTime = #{processingTime,jdbcType=TIMESTAMP},
+      userNickName = #{userNickName,jdbcType=VARCHAR},
+      sheetType = #{sheetType,jdbcType=VARCHAR},
+      message = #{message,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

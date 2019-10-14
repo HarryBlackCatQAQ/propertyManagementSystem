@@ -8,12 +8,15 @@ import java.util.Date;
  * @author 
  */
 public class ComplaintAndSuggestionSheet implements Serializable {
+    /**
+     * 投诉建议单Id
+     */
     private Integer id;
 
     /**
-     * 提交投诉建议单的业主Id
+     * 单子创建用户ID
      */
-    private Integer proprietorid;
+    private Integer proprietorId;
 
     /**
      * 单子状态
@@ -23,12 +26,32 @@ public class ComplaintAndSuggestionSheet implements Serializable {
     /**
      * 提交时间
      */
-    private Date submittime;
+    private Date submitTime;
 
     /**
-     * 处理时间
+     * 最新处理时间
      */
-    private Date processingtime;
+    private Date processingTime;
+
+    /**
+     * 用户昵称
+     */
+    private String userNickName;
+
+    /**
+     * 单子类型
+     */
+    private String sheetType;
+
+    /**
+     * 投书建议单内容(备注)
+     */
+    private String message;
+
+    /**
+     * 主题
+     */
+    private String title;
 
     private static final long serialVersionUID = 1L;
 
@@ -40,12 +63,12 @@ public class ComplaintAndSuggestionSheet implements Serializable {
         this.id = id;
     }
 
-    public Integer getProprietorid() {
-        return proprietorid;
+    public Integer getProprietorId() {
+        return proprietorId;
     }
 
-    public void setProprietorid(Integer proprietorid) {
-        this.proprietorid = proprietorid;
+    public void setProprietorId(Integer proprietorId) {
+        this.proprietorId = proprietorId;
     }
 
     public String getState() {
@@ -56,20 +79,52 @@ public class ComplaintAndSuggestionSheet implements Serializable {
         this.state = state;
     }
 
-    public Date getSubmittime() {
-        return submittime;
+    public Date getSubmitTime() {
+        return submitTime;
     }
 
-    public void setSubmittime(Date submittime) {
-        this.submittime = submittime;
+    public void setSubmitTime(Date submitTime) {
+        this.submitTime = submitTime;
     }
 
-    public Date getProcessingtime() {
-        return processingtime;
+    public Date getProcessingTime() {
+        return processingTime;
     }
 
-    public void setProcessingtime(Date processingtime) {
-        this.processingtime = processingtime;
+    public void setProcessingTime(Date processingTime) {
+        this.processingTime = processingTime;
+    }
+
+    public String getUserNickName() {
+        return userNickName;
+    }
+
+    public void setUserNickName(String userNickName) {
+        this.userNickName = userNickName;
+    }
+
+    public String getSheetType() {
+        return sheetType;
+    }
+
+    public void setSheetType(String sheetType) {
+        this.sheetType = sheetType;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override
@@ -85,10 +140,14 @@ public class ComplaintAndSuggestionSheet implements Serializable {
         }
         ComplaintAndSuggestionSheet other = (ComplaintAndSuggestionSheet) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getProprietorid() == null ? other.getProprietorid() == null : this.getProprietorid().equals(other.getProprietorid()))
+            && (this.getProprietorId() == null ? other.getProprietorId() == null : this.getProprietorId().equals(other.getProprietorId()))
             && (this.getState() == null ? other.getState() == null : this.getState().equals(other.getState()))
-            && (this.getSubmittime() == null ? other.getSubmittime() == null : this.getSubmittime().equals(other.getSubmittime()))
-            && (this.getProcessingtime() == null ? other.getProcessingtime() == null : this.getProcessingtime().equals(other.getProcessingtime()));
+            && (this.getSubmitTime() == null ? other.getSubmitTime() == null : this.getSubmitTime().equals(other.getSubmitTime()))
+            && (this.getProcessingTime() == null ? other.getProcessingTime() == null : this.getProcessingTime().equals(other.getProcessingTime()))
+            && (this.getUserNickName() == null ? other.getUserNickName() == null : this.getUserNickName().equals(other.getUserNickName()))
+            && (this.getSheetType() == null ? other.getSheetType() == null : this.getSheetType().equals(other.getSheetType()))
+            && (this.getMessage() == null ? other.getMessage() == null : this.getMessage().equals(other.getMessage()))
+            && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()));
     }
 
     @Override
@@ -96,10 +155,14 @@ public class ComplaintAndSuggestionSheet implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getProprietorid() == null) ? 0 : getProprietorid().hashCode());
+        result = prime * result + ((getProprietorId() == null) ? 0 : getProprietorId().hashCode());
         result = prime * result + ((getState() == null) ? 0 : getState().hashCode());
-        result = prime * result + ((getSubmittime() == null) ? 0 : getSubmittime().hashCode());
-        result = prime * result + ((getProcessingtime() == null) ? 0 : getProcessingtime().hashCode());
+        result = prime * result + ((getSubmitTime() == null) ? 0 : getSubmitTime().hashCode());
+        result = prime * result + ((getProcessingTime() == null) ? 0 : getProcessingTime().hashCode());
+        result = prime * result + ((getUserNickName() == null) ? 0 : getUserNickName().hashCode());
+        result = prime * result + ((getSheetType() == null) ? 0 : getSheetType().hashCode());
+        result = prime * result + ((getMessage() == null) ? 0 : getMessage().hashCode());
+        result = prime * result + ((getTitle() == null) ? 0 : getTitle().hashCode());
         return result;
     }
 
@@ -110,10 +173,14 @@ public class ComplaintAndSuggestionSheet implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", proprietorid=").append(proprietorid);
+        sb.append(", proprietorId=").append(proprietorId);
         sb.append(", state=").append(state);
-        sb.append(", submittime=").append(submittime);
-        sb.append(", processingtime=").append(processingtime);
+        sb.append(", submitTime=").append(submitTime);
+        sb.append(", processingTime=").append(processingTime);
+        sb.append(", userNickName=").append(userNickName);
+        sb.append(", sheetType=").append(sheetType);
+        sb.append(", message=").append(message);
+        sb.append(", title=").append(title);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -2,18 +2,22 @@ package com.bnuz.propertyManagementSystem.service.impl;
 
 import com.bnuz.propertyManagementSystem.dao.ComplaintAndSuggestionSheetDao;
 import com.bnuz.propertyManagementSystem.dao.ComplaintAndSuggestionSheetTimelineDao;
+import com.bnuz.propertyManagementSystem.dao.MyBatisBaseDao;
 import com.bnuz.propertyManagementSystem.model.ComplaintAndSuggestionSheet;
 import com.bnuz.propertyManagementSystem.model.ComplaintAndSuggestionSheetTimeline;
 import com.bnuz.propertyManagementSystem.model.Result;
 import com.bnuz.propertyManagementSystem.model.ResultStatusCode;
 import com.bnuz.propertyManagementSystem.service.ComplaintAndSuggestionSheetService;
 import com.bnuz.propertyManagementSystem.util.DateUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @Author: Harry
@@ -59,8 +63,16 @@ public class ComplaintAndSuggestionSheetServiceImpl implements ComplaintAndSugge
     }
 
     @Override
-    public Result queryComplaintAndSuggestionSheet() {
-        return null;
+    public Result queryOwnerComplaintAndSuggestionSheetByUserId(int userId,int pageNum,int size) {
+//        System.err.println(userId + " " + pageNum + " " + size);
+
+        PageHelper.startPage(pageNum,size);
+        PageHelper.orderBy( "submitTime " + MyBatisBaseDao.DESC);
+        List<ComplaintAndSuggestionSheet> list = complaintAndSuggestionSheetDao.selectUserComplaintAndSuggestionSheetListByUserId(userId);
+//        System.err.println(list);
+
+        PageInfo<ComplaintAndSuggestionSheet> page = new PageInfo<ComplaintAndSuggestionSheet>(list);
+        return new Result(true,ResultStatusCode.OK,"查询成功!",page);
     }
 
     @Override

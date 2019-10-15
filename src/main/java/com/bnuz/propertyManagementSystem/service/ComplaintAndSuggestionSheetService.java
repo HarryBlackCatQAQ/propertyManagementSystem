@@ -6,7 +6,7 @@ import com.bnuz.propertyManagementSystem.model.Result;
 public interface ComplaintAndSuggestionSheetService {
     public Result createComplaintAndSuggestionSheet(ComplaintAndSuggestionSheet complaintAndSuggestionSheet);
 
-    public Result queryComplaintAndSuggestionSheet();
+    public Result queryOwnerComplaintAndSuggestionSheetByUserId(int userId,int pageNum,int size);
 
     public Result updateComplaintAndSuggestionSheet();
 

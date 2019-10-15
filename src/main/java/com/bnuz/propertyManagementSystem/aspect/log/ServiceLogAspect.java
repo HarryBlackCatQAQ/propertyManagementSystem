@@ -65,7 +65,9 @@ public class ServiceLogAspect {
 
             result = sub(result);
         }
-
+        if(result != null && result.length() >= 105){
+            result = result.substring(0,100) + "......";
+        }
         log.info("afterReturning : " + result);
         log.info("<<------------------------end------------------------->>");
     }

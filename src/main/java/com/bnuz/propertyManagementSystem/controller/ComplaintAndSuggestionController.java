@@ -23,14 +23,15 @@ public class ComplaintAndSuggestionController {
 
 
     @PostMapping(value = "/create")
-    @ApiOperation("获取投诉建议单")
+    @ApiOperation("申请投诉建议单")
     public Result createComplaintAndSuggestionSheet(@RequestBody ComplaintAndSuggestionSheet complaintAndSuggestionSheet){
         return complaintAndSuggestionSheetService.createComplaintAndSuggestionSheet(complaintAndSuggestionSheet);
     }
 
-    @PostMapping(value = "/query")
-    public Result queryComplaintAndSuggestionSheet(){
-        return new Result();
+    @GetMapping(value = "/query")
+    @ApiOperation("获取投诉建议单")
+    public Result queryOwnerComplaintAndSuggestionSheetById(int userId,int pageNum,int size){
+        return complaintAndSuggestionSheetService.queryOwnerComplaintAndSuggestionSheetByUserId(userId, pageNum, size);
     }
 
     @PostMapping(value = "/update")

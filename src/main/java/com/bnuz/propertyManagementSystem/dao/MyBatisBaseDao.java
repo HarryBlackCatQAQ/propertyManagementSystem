@@ -32,4 +32,15 @@ public interface MyBatisBaseDao<Model, PK extends Serializable, E> {
     int updateByPrimaryKeySelective(Model record);
 
     int updateByPrimaryKey(Model record);
+
+
+    /**
+     *降序
+     */
+    public final static String DESC = "desc";
+
+    /**
+     *升序
+     */
+    public final static String ASC = "asc";
 }

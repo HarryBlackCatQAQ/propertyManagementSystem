@@ -1,6 +1,8 @@
 package com.bnuz.propertyManagementSystem.controller;
 
+import com.bnuz.propertyManagementSystem.dao.ComplaintAndSuggestionSheetDao;
 import com.bnuz.propertyManagementSystem.dao.UserDao;
+import com.bnuz.propertyManagementSystem.model.ComplaintAndSuggestionSheet;
 import com.bnuz.propertyManagementSystem.model.User;
 import com.bnuz.propertyManagementSystem.redisson.DistributedLocker;
 import com.bnuz.propertyManagementSystem.service.UserService;
@@ -99,7 +101,16 @@ public class TestController {
         return "ok2";
     }
 
+    @Autowired
+    private ComplaintAndSuggestionSheetDao complaintAndSuggestionSheetDao;
 
+    @GetMapping("/sheet")
+    public Object aaaaa(int id){
+        System.err.println("id:" + id);
+        List<ComplaintAndSuggestionSheet> list = complaintAndSuggestionSheetDao.selectUserComplaintAndSuggestionSheetListByUserId(id);
+        System.err.println(list);
+        return list;
+    }
 
     @Autowired
     private DistributedLocker distributedLocker;

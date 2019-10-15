@@ -1,7 +1,12 @@
 package com.bnuz.propertyManagementSystem.model;
 
+import org.apache.ibatis.annotations.Many;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * complaint_and_suggestion_sheet
@@ -52,6 +57,16 @@ public class ComplaintAndSuggestionSheet implements Serializable {
      * 主题
      */
     private String title;
+
+    /**
+     * 图片List
+     */
+    private List<ComplaintAndSuggestionSheetImage> imageList;
+
+    /**
+     * 时间表List
+     */
+    private List<ComplaintAndSuggestionSheetTimeline> timelineList;
 
     private static final long serialVersionUID = 1L;
 
@@ -125,6 +140,22 @@ public class ComplaintAndSuggestionSheet implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public List<ComplaintAndSuggestionSheetImage> getImageList() {
+        return imageList;
+    }
+
+    public void setImageList(List<ComplaintAndSuggestionSheetImage> imageList) {
+        this.imageList = imageList;
+    }
+
+    public List<ComplaintAndSuggestionSheetTimeline> getTimelineList() {
+        return timelineList;
+    }
+
+    public void setTimelineList(List<ComplaintAndSuggestionSheetTimeline> timelineList) {
+        this.timelineList = timelineList;
     }
 
     @Override

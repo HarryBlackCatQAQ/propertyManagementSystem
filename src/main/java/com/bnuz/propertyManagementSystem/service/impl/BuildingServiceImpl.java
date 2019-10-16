@@ -5,7 +5,6 @@ import com.bnuz.propertyManagementSystem.model.Building;
 import com.bnuz.propertyManagementSystem.model.Result;
 import com.bnuz.propertyManagementSystem.model.ResultStatusCode;
 import com.bnuz.propertyManagementSystem.service.BuildingService;
-import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -43,6 +42,7 @@ public class BuildingServiceImpl implements BuildingService {
   }
 
   @Override
+  @Transactional(readOnly = true)
   public Result findAll(Integer pageNum, Integer pageSize) {
     Pageable pageable = PageRequest.of(pageNum, pageSize);
     Page page = buildingDao.findAll(pageable);
@@ -50,14 +50,17 @@ public class BuildingServiceImpl implements BuildingService {
   }
 
   @Override
-  public Result getById(Integer id) {
-    Building building = buildingDao.getById(id);
-    return new Result(true, ResultStatusCode.OK, "查询成功", building);
+  @Transactional(readOnly = true)
+  public Result findAllByPropertyId(Integer pageNum, Integer pageSize, Integer propertyId) {
+    Pageable pageable = PageRequest.of(pageNum, pageSize);
+    Page page = buildingDao.findAllByPropertyId(pageable, propertyId);
+    return new Result(true, ResultStatusCode.OK, "查询成功", page);
   }
 
   @Override
-  public Result getByUid(Integer uid) {
-    Building building = buildingDao.getByUid(uid);
+  @Transactional(readOnly = true)
+  public Result getById(Integer id) {
+    Building building = buildingDao.getById(id);
     return new Result(true, ResultStatusCode.OK, "查询成功", building);
   }
 

@@ -41,6 +41,12 @@ public interface PropertyService {
   Result findAll(Integer pageNum, Integer pageSize);
 
   /**
+   * 获取第一个楼盘
+   * @return
+   */
+  Result getFirst();
+
+  /**
    * 根据id获取楼盘
    * @param id
    * @return
@@ -52,7 +58,7 @@ public interface PropertyService {
    * @param uid
    * @return
    */
-  Result getByUid(Integer uid);
+  Result getByUid(Long uid);
 
   /**
    * 根据名字获取楼盘

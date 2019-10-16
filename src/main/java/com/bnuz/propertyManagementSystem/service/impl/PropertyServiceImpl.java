@@ -59,6 +59,13 @@ public class PropertyServiceImpl implements PropertyService {
 
   @Override
   @Transactional(readOnly = true)
+  public Result getFirst() {
+    Property property = propertyDao.getFirstBy();
+    return new Result(true, ResultStatusCode.OK, "查询成功", property);
+  }
+
+  @Override
+  @Transactional(readOnly = true)
   public Result getById(Integer id) {
     Property property = propertyDao.getById(id);
     return new Result(true, ResultStatusCode.OK, "查询成功", property);
@@ -66,7 +73,7 @@ public class PropertyServiceImpl implements PropertyService {
 
   @Override
   @Transactional(readOnly = true)
-  public Result getByUid(Integer uid) {
+  public Result getByUid(Long uid) {
     Property property = propertyDao.getByUid(uid);
     return new Result(true, ResultStatusCode.OK, "查询成功", property);
   }

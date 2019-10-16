@@ -1,5 +1,7 @@
 package com.bnuz.propertyManagementSystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
@@ -26,15 +28,21 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class Property implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(value = "主键ID", hidden = true)
     private Integer id;
 
+    @ApiModelProperty(value = "楼盘名称", example = "京师家园")
     private String name; //楼盘名称
 
+    @ApiModelProperty(value = "楼盘位置", example = "广东省珠海市香洲区金凤路18号")
     private String location; //楼盘位置
 
+    @ApiModelProperty(value = "楼盘编号", example = "519087")
     private Long uid; //楼盘编号
 
     @OneToMany(mappedBy = "property")
+    @JsonIgnore
+    @ApiModelProperty(value = "楼盘楼栋集合", hidden = true)
     private List<Building> buildings; //楼盘楼栋集合
 
     private static final long serialVersionUID = 1L;

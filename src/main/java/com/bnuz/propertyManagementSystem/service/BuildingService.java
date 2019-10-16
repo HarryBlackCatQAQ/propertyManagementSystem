@@ -34,17 +34,19 @@ public interface BuildingService {
   Result findAll(Integer pageNum, Integer pageSize);
 
   /**
+   * 根据楼盘Uid获取所有楼栋并分页
+   * @param pageNum
+   * @param pageSize
+   * @param propertyId
+   * @return
+   */
+  Result findAllByPropertyId(Integer pageNum, Integer pageSize, Integer propertyId);
+
+  /**
    * 根据id获取楼栋
    * @param id
    * @return
    */
   Result getById(Integer id);
-
-  /**
-   * 根据uid获取楼栋
-   * @param uid
-   * @return
-   */
-  Result getByUid(Integer uid);
 
 }

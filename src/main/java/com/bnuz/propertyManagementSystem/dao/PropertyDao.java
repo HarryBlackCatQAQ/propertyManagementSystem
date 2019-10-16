@@ -15,9 +15,11 @@ public interface PropertyDao extends JpaRepository<Property, Integer> {
 
   Page<Property> findAll(Pageable pageable);
 
+  Property getFirstBy();
+
   Property getById(Integer id);
 
-  Property getByUid(Integer uid);
+  Property getByUid(Long uid);
 
   Property getByName(String propertyName);
 

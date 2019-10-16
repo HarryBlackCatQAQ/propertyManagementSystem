@@ -4,8 +4,11 @@ import com.bnuz.propertyManagementSystem.model.Property;
 import com.bnuz.propertyManagementSystem.model.Result;
 import com.bnuz.propertyManagementSystem.service.PropertyService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,26 +43,52 @@ public class PropertyController {
     return propertyService.update(property);
   }
 
+  @DeleteMapping(value = "delete")
+  @ApiOperation("删除楼盘接口")
+  public Result delete(@RequestBody Property property) {
+    return propertyService.delete(property);
+  }
+
+
   @GetMapping(value = "findAll")
   @ApiOperation("获取所有楼盘并分页接口")
+  @ApiImplicitParams({
+    @ApiImplicitParam(name = "pageNum", value = "用户列表页码", defaultValue = "1"),
+    @ApiImplicitParam(name = "pageSize", value = "每页条数", defaultValue = "10")
+  })
   public Result findAll(@RequestParam Integer pageNum, Integer pageSize) {
     return propertyService.findAll(pageNum - 1, pageSize);
   }
 
+  @GetMapping(value = "getFirst")
+  @ApiOperation("获取第一个楼盘接口")
+  public Result getFirst() {
+    return propertyService.getFirst();
+  }
+
   @GetMapping("getById")
   @ApiOperation("根据ID获取楼盘接口")
+  @ApiImplicitParams({
+    @ApiImplicitParam(name = "id", value = "楼盘主键ID", defaultValue = "1")
+  })
   public Result getById(@RequestParam Integer id) {
     return propertyService.getById(id);
   }
 
   @GetMapping("getByUid")
   @ApiOperation("根据编码获取楼盘接口")
-  public Result getByUid(@RequestParam Integer uid) {
+  @ApiImplicitParams({
+    @ApiImplicitParam(name = "uid", value = "楼盘编码Uid", defaultValue = "519087")
+  })
+  public Result getByUid(@RequestParam Long uid) {
     return propertyService.getByUid(uid);
   }
 
   @GetMapping("checkPropertyName")
   @ApiOperation("检查楼盘名字是否存在接口")
+  @ApiImplicitParams({
+    @ApiImplicitParam(name = "propertyName", value = "楼盘名字", defaultValue = "京师家园")
+  })
   public Result checkPropertyName(@RequestParam String propertyName){
     return propertyService.getByName(propertyName);
   }

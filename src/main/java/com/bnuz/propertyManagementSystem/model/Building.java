@@ -1,7 +1,10 @@
 package com.bnuz.propertyManagementSystem.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -9,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
@@ -28,80 +32,39 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class Building implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(value = "主键ID", hidden = true)
     private Integer id;
 
+    @ApiModelProperty(value = "楼栋名称", example = "京华五栋")
     private String name; //楼栋名称
 
+    @ApiModelProperty(value = "楼栋地址", example = "广东省珠海市香洲区金凤路18号")
     private String address; //楼栋地址
 
+    @ApiModelProperty(value = "楼栋层数", example = "9")
     private Integer layer; //楼栋层数
 
+    @ApiModelProperty(value = "楼栋户数", example = "651")
     private Integer houseHold; //楼栋户数
 
-    private Long uid; //楼栋编号
+    @ApiModelProperty(value = "所属楼盘Id", example = "3")
+    private Integer propertyId; //所属楼盘Id
 
-    private Long propertyUid; //所属楼盘Uid
-
+    @ApiModelProperty(value = "楼栋备注")
     private String remark; //楼栋备注
 
     @ManyToOne
-    @JoinColumn(name = "propertyUid", referencedColumnName = "uid",
-        insertable = false ,updatable = false)
+    @JoinColumn(name = "propertyId", insertable = false ,updatable = false)
+    @JsonIgnore
     @JsonBackReference
+    @ApiModelProperty(value = "所属楼盘", hidden = true)
     private Property property; //所属楼盘
+
+    @OneToMany(mappedBy = "building")
+    @JsonIgnore
+    @ApiModelProperty(value = "楼栋房屋集合", hidden = true)
+    private List<House> houses; //楼栋房屋集合
 
     private static final long serialVersionUID = 1L;
 
-    @Override
-    public boolean equals(Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (getClass() != that.getClass()) {
-            return false;
-        }
-        Building other = (Building) that;
-        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getAddress() == null ? other.getAddress() == null : this.getAddress().equals(other.getAddress()))
-            && (this.getLayer() == null ? other.getLayer() == null : this.getLayer().equals(other.getLayer()))
-            && (this.getHouseHold() == null ? other.getHouseHold() == null : this.getHouseHold().equals(other.getHouseHold()))
-            && (this.getUid() == null ? other.getUid() == null : this.getUid().equals(other.getUid()))
-            && (this.getPropertyUid() == null ? other.getPropertyUid() == null : this.getPropertyUid().equals(other.getPropertyUid()));
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-        result = prime * result + ((getAddress() == null) ? 0 : getAddress().hashCode());
-        result = prime * result + ((getLayer() == null) ? 0 : getLayer().hashCode());
-        result = prime * result + ((getHouseHold() == null) ? 0 : getHouseHold().hashCode());
-        result = prime * result + ((getUid() == null) ? 0 : getUid().hashCode());
-        result = prime * result + ((getPropertyUid() == null) ? 0 : getPropertyUid().hashCode());
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", name=").append(name);
-        sb.append(", address=").append(address);
-        sb.append(", layer=").append(layer);
-        sb.append(", houseHold=").append(houseHold);
-        sb.append(", uid=").append(uid);
-        sb.append(", propertyUid=").append(propertyUid);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
-    }
 }

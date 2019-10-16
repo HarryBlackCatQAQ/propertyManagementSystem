@@ -26,12 +26,25 @@ public interface PropertyService {
   Result update(Property property);
 
   /**
+   * 删除楼盘
+   * @param property
+   * @return
+   */
+  Result delete(Property property);
+
+  /**
    * 获取所有楼盘并分页
    * @param pageNum
    * @param pageSize
    * @return
    */
   Result findAll(Integer pageNum, Integer pageSize);
+
+  /**
+   * 获取第一个楼盘
+   * @return
+   */
+  Result getFirst();
 
   /**
    * 根据id获取楼盘
@@ -45,7 +58,7 @@ public interface PropertyService {
    * @param uid
    * @return
    */
-  Result getByUid(Integer uid);
+  Result getByUid(Long uid);
 
   /**
    * 根据名字获取楼盘

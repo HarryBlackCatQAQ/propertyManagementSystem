@@ -4,6 +4,8 @@ import com.bnuz.propertyManagementSystem.model.Building;
 import com.bnuz.propertyManagementSystem.model.Result;
 import com.bnuz.propertyManagementSystem.service.BuildingService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,20 +37,32 @@ public class BuildingController {
 
   @GetMapping(value = "findAll")
   @ApiOperation("获取所有楼栋并分页接口")
+  @ApiImplicitParams({
+    @ApiImplicitParam(name = "pageNum", value = "用户列表页码", defaultValue = "1"),
+    @ApiImplicitParam(name = "pageSize", value = "每页条数", defaultValue = "10")
+  })
   public Result findAll(@RequestParam Integer pageNum, Integer pageSize) {
     return buildingService.findAll(pageNum - 1, pageSize);
   }
 
-  @GetMapping(value = "getById")
-  @ApiOperation("根据ID获取楼栋接口")
-  public Result getById(@RequestParam Integer id){
-    return buildingService.getById(id);
+  @GetMapping(value = "findAllByPropertyId")
+  @ApiOperation("根据楼盘Id获取所有楼栋并分页接口")
+  @ApiImplicitParams({
+      @ApiImplicitParam(name = "pageNum", value = "用户列表页码", defaultValue = "1"),
+      @ApiImplicitParam(name = "pageSize", value = "每页条数", defaultValue = "10"),
+      @ApiImplicitParam(name = "propertyId", value = "楼栋Id", defaultValue = "3")
+  })
+  public Result findAllByPropertyId(@RequestParam Integer pageNum, Integer pageSize, Integer propertyId) {
+    return buildingService.findAllByPropertyId(pageNum - 1, pageSize, propertyId);
   }
 
-  @GetMapping(value = "getByUid")
-  @ApiOperation("根据编码获取楼栋接口")
-  public Result getByUid(@RequestParam Integer uid) {
-    return buildingService.getByUid(uid);
+  @GetMapping(value = "getById")
+  @ApiOperation("根据ID获取楼栋接口")
+  @ApiImplicitParams({
+    @ApiImplicitParam(name = "id", value = "楼栋主键ID", defaultValue = "1")
+  })
+  public Result getById(@RequestParam Integer id){
+    return buildingService.getById(id);
   }
 
 }

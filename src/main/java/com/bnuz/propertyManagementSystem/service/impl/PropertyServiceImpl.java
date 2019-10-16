@@ -42,6 +42,15 @@ public class PropertyServiceImpl implements PropertyService {
   }
 
   @Override
+  public Result delete(Property property) {
+    synchronized (PropertyServiceImpl.class) {
+      propertyDao.delete(property);
+      return new Result(true, ResultStatusCode.OK, "删除成功");
+    }
+  }
+
+  @Override
+  @Transactional(readOnly = true)
   public Result findAll(Integer pageNum, Integer pageSize) {
     Pageable pageable = PageRequest.of(pageNum,pageSize);
     Page page = propertyDao.findAll(pageable);
@@ -49,18 +58,28 @@ public class PropertyServiceImpl implements PropertyService {
   }
 
   @Override
+  @Transactional(readOnly = true)
+  public Result getFirst() {
+    Property property = propertyDao.getFirstBy();
+    return new Result(true, ResultStatusCode.OK, "查询成功", property);
+  }
+
+  @Override
+  @Transactional(readOnly = true)
   public Result getById(Integer id) {
     Property property = propertyDao.getById(id);
     return new Result(true, ResultStatusCode.OK, "查询成功", property);
   }
 
   @Override
-  public Result getByUid(Integer uid) {
+  @Transactional(readOnly = true)
+  public Result getByUid(Long uid) {
     Property property = propertyDao.getByUid(uid);
     return new Result(true, ResultStatusCode.OK, "查询成功", property);
   }
 
   @Override
+  @Transactional(readOnly = true)
   public Result getByName(String propertyName) {
     Property property = propertyDao.getByName(propertyName);
     if(property != null) {

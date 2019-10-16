@@ -42,7 +42,12 @@ public class ServiceLogAspect {
             if(counter++ != 0){
                 logs.append(", ");
             }
-            logs.append(JSONObject.toJSONString(arg));
+            try{
+                logs.append(JSONObject.toJSONString(arg));
+            }
+            catch (com.alibaba.fastjson.JSONException e){
+                log.warn("alibaba.fastjson无法转化bean:" + e.toString());
+            }
         }
 
         log.info("<<----------------------start------------------------->>");
@@ -60,7 +65,9 @@ public class ServiceLogAspect {
 
             result = sub(result);
         }
-
+        if(result != null && result.length() >= 105){
+            result = result.substring(0,100) + "......";
+        }
         log.info("afterReturning : " + result);
         log.info("<<------------------------end------------------------->>");
     }

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bnuz.propertyManagementSystem.dao.ComplaintAndSuggestionSheetTimelineDao">
+  <resultMap id="BaseResultMap" type="com.bnuz.propertyManagementSystem.model.ComplaintAndSuggestionSheetTimeline">
+    <id column="complaint_and_suggestion_sheet_timeline_id" jdbcType="INTEGER" property="id" />
+    <result column="complaint_and_suggestion_sheet_timeline_sheetId" jdbcType="INTEGER" property="sheetId" />
+    <result column="complaint_and_suggestion_sheet_timeline_processingTime" jdbcType="TIMESTAMP" property="processingTime" />
+    <result column="complaint_and_suggestion_sheet_timeline_message" jdbcType="VARCHAR" property="message" />
+    <result column="complaint_and_suggestion_sheet_timeline_processingUserNickName" jdbcType="VARCHAR" property="processingUserNickName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    complaint_and_suggestion_sheet_timeline.id as complaint_and_suggestion_sheet_timeline_id, 
+    complaint_and_suggestion_sheet_timeline.sheetId as complaint_and_suggestion_sheet_timeline_sheetId, 
+    complaint_and_suggestion_sheet_timeline.processingTime as complaint_and_suggestion_sheet_timeline_processingTime, 
+    complaint_and_suggestion_sheet_timeline.message as complaint_and_suggestion_sheet_timeline_message, 
+    complaint_and_suggestion_sheet_timeline.processingUserNickName as complaint_and_suggestion_sheet_timeline_processingUserNickName
+  </sql>
+  <select id="selectByExample" parameterType="com.bnuz.propertyManagementSystem.model.ComplaintAndSuggestionSheetTimelineExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from complaint_and_suggestion_sheet_timeline complaint_and_suggestion_sheet_timeline
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from complaint_and_suggestion_sheet_timeline complaint_and_suggestion_sheet_timeline
+    where complaint_and_suggestion_sheet_timeline.id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from complaint_and_suggestion_sheet_timeline
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bnuz.propertyManagementSystem.model.ComplaintAndSuggestionSheetTimelineExample">
+    delete from complaint_and_suggestion_sheet_timeline complaint_and_suggestion_sheet_timeline
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.bnuz.propertyManagementSystem.model.ComplaintAndSuggestionSheetTimeline" useGeneratedKeys="true">
+    insert into complaint_and_suggestion_sheet_timeline (sheetId, processingTime, message, 
+      processingUserNickName)
+    values (#{sheetId,jdbcType=INTEGER}, #{processingTime,jdbcType=TIMESTAMP}, #{message,jdbcType=VARCHAR}, 
+      #{processingUserNickName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.bnuz.propertyManagementSystem.model.ComplaintAndSuggestionSheetTimeline" useGeneratedKeys="true">
+    insert into complaint_and_suggestion_sheet_timeline
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sheetId != null">
+        sheetId,
+      </if>
+      <if test="processingTime != null">
+        processingTime,
+      </if>
+      <if test="message != null">
+        message,
+      </if>
+      <if test="processingUserNickName != null">
+        processingUserNickName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sheetId != null">
+        #{sheetId,jdbcType=INTEGER},
+      </if>
+      <if test="processingTime != null">
+        #{processingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="message != null">
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="processingUserNickName != null">
+        #{processingUserNickName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bnuz.propertyManagementSystem.model.ComplaintAndSuggestionSheetTimelineExample" resultType="java.lang.Long">
+    select count(*) from complaint_and_suggestion_sheet_timeline complaint_and_suggestion_sheet_timeline
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update complaint_and_suggestion_sheet_timeline complaint_and_suggestion_sheet_timeline
+    <set>
+      <if test="record.id != null">
+        complaint_and_suggestion_sheet_timeline.id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.sheetId != null">
+        complaint_and_suggestion_sheet_timeline.sheetId = #{record.sheetId,jdbcType=INTEGER},
+      </if>
+      <if test="record.processingTime != null">
+        complaint_and_suggestion_sheet_timeline.processingTime = #{record.processingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.message != null">
+        complaint_and_suggestion_sheet_timeline.message = #{record.message,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processingUserNickName != null">
+        complaint_and_suggestion_sheet_timeline.processingUserNickName = #{record.processingUserNickName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update complaint_and_suggestion_sheet_timeline complaint_and_suggestion_sheet_timeline
+    set complaint_and_suggestion_sheet_timeline.id = #{record.id,jdbcType=INTEGER},
+      complaint_and_suggestion_sheet_timeline.sheetId = #{record.sheetId,jdbcType=INTEGER},
+      complaint_and_suggestion_sheet_timeline.processingTime = #{record.processingTime,jdbcType=TIMESTAMP},
+      complaint_and_suggestion_sheet_timeline.message = #{record.message,jdbcType=VARCHAR},
+      complaint_and_suggestion_sheet_timeline.processingUserNickName = #{record.processingUserNickName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bnuz.propertyManagementSystem.model.ComplaintAndSuggestionSheetTimeline">
+    update complaint_and_suggestion_sheet_timeline
+    <set>
+      <if test="sheetId != null">
+        sheetId = #{sheetId,jdbcType=INTEGER},
+      </if>
+      <if test="processingTime != null">
+        processingTime = #{processingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="message != null">
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="processingUserNickName != null">
+        processingUserNickName = #{processingUserNickName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bnuz.propertyManagementSystem.model.ComplaintAndSuggestionSheetTimeline">
+    update complaint_and_suggestion_sheet_timeline
+    set sheetId = #{sheetId,jdbcType=INTEGER},
+      processingTime = #{processingTime,jdbcType=TIMESTAMP},
+      message = #{message,jdbcType=VARCHAR},
+      processingUserNickName = #{processingUserNickName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -185,63 +185,63 @@ public class ComplaintAndSuggestionSheetExample {
             return (Criteria) this;
         }
 
-        public Criteria andProprietoridIsNull() {
+        public Criteria andProprietorIdIsNull() {
             addCriterion("complaint_and_suggestion_sheet.proprietorId is null");
             return (Criteria) this;
         }
 
-        public Criteria andProprietoridIsNotNull() {
+        public Criteria andProprietorIdIsNotNull() {
             addCriterion("complaint_and_suggestion_sheet.proprietorId is not null");
             return (Criteria) this;
         }
 
-        public Criteria andProprietoridEqualTo(Integer value) {
-            addCriterion("complaint_and_suggestion_sheet.proprietorId =", value, "proprietorid");
+        public Criteria andProprietorIdEqualTo(Integer value) {
+            addCriterion("complaint_and_suggestion_sheet.proprietorId =", value, "proprietorId");
             return (Criteria) this;
         }
 
-        public Criteria andProprietoridNotEqualTo(Integer value) {
-            addCriterion("complaint_and_suggestion_sheet.proprietorId <>", value, "proprietorid");
+        public Criteria andProprietorIdNotEqualTo(Integer value) {
+            addCriterion("complaint_and_suggestion_sheet.proprietorId <>", value, "proprietorId");
             return (Criteria) this;
         }
 
-        public Criteria andProprietoridGreaterThan(Integer value) {
-            addCriterion("complaint_and_suggestion_sheet.proprietorId >", value, "proprietorid");
+        public Criteria andProprietorIdGreaterThan(Integer value) {
+            addCriterion("complaint_and_suggestion_sheet.proprietorId >", value, "proprietorId");
             return (Criteria) this;
         }
 
-        public Criteria andProprietoridGreaterThanOrEqualTo(Integer value) {
-            addCriterion("complaint_and_suggestion_sheet.proprietorId >=", value, "proprietorid");
+        public Criteria andProprietorIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("complaint_and_suggestion_sheet.proprietorId >=", value, "proprietorId");
             return (Criteria) this;
         }
 
-        public Criteria andProprietoridLessThan(Integer value) {
-            addCriterion("complaint_and_suggestion_sheet.proprietorId <", value, "proprietorid");
+        public Criteria andProprietorIdLessThan(Integer value) {
+            addCriterion("complaint_and_suggestion_sheet.proprietorId <", value, "proprietorId");
             return (Criteria) this;
         }
 
-        public Criteria andProprietoridLessThanOrEqualTo(Integer value) {
-            addCriterion("complaint_and_suggestion_sheet.proprietorId <=", value, "proprietorid");
+        public Criteria andProprietorIdLessThanOrEqualTo(Integer value) {
+            addCriterion("complaint_and_suggestion_sheet.proprietorId <=", value, "proprietorId");
             return (Criteria) this;
         }
 
-        public Criteria andProprietoridIn(List<Integer> values) {
-            addCriterion("complaint_and_suggestion_sheet.proprietorId in", values, "proprietorid");
+        public Criteria andProprietorIdIn(List<Integer> values) {
+            addCriterion("complaint_and_suggestion_sheet.proprietorId in", values, "proprietorId");
             return (Criteria) this;
         }
 
-        public Criteria andProprietoridNotIn(List<Integer> values) {
-            addCriterion("complaint_and_suggestion_sheet.proprietorId not in", values, "proprietorid");
+        public Criteria andProprietorIdNotIn(List<Integer> values) {
+            addCriterion("complaint_and_suggestion_sheet.proprietorId not in", values, "proprietorId");
             return (Criteria) this;
         }
 
-        public Criteria andProprietoridBetween(Integer value1, Integer value2) {
-            addCriterion("complaint_and_suggestion_sheet.proprietorId between", value1, value2, "proprietorid");
+        public Criteria andProprietorIdBetween(Integer value1, Integer value2) {
+            addCriterion("complaint_and_suggestion_sheet.proprietorId between", value1, value2, "proprietorId");
             return (Criteria) this;
         }
 
-        public Criteria andProprietoridNotBetween(Integer value1, Integer value2) {
-            addCriterion("complaint_and_suggestion_sheet.proprietorId not between", value1, value2, "proprietorid");
+        public Criteria andProprietorIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("complaint_and_suggestion_sheet.proprietorId not between", value1, value2, "proprietorId");
             return (Criteria) this;
         }
 
@@ -315,123 +315,403 @@ public class ComplaintAndSuggestionSheetExample {
             return (Criteria) this;
         }
 
-        public Criteria andSubmittimeIsNull() {
+        public Criteria andSubmitTimeIsNull() {
             addCriterion("complaint_and_suggestion_sheet.submitTime is null");
             return (Criteria) this;
         }
 
-        public Criteria andSubmittimeIsNotNull() {
+        public Criteria andSubmitTimeIsNotNull() {
             addCriterion("complaint_and_suggestion_sheet.submitTime is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSubmittimeEqualTo(Date value) {
-            addCriterion("complaint_and_suggestion_sheet.submitTime =", value, "submittime");
+        public Criteria andSubmitTimeEqualTo(Date value) {
+            addCriterion("complaint_and_suggestion_sheet.submitTime =", value, "submitTime");
             return (Criteria) this;
         }
 
-        public Criteria andSubmittimeNotEqualTo(Date value) {
-            addCriterion("complaint_and_suggestion_sheet.submitTime <>", value, "submittime");
+        public Criteria andSubmitTimeNotEqualTo(Date value) {
+            addCriterion("complaint_and_suggestion_sheet.submitTime <>", value, "submitTime");
             return (Criteria) this;
         }
 
-        public Criteria andSubmittimeGreaterThan(Date value) {
-            addCriterion("complaint_and_suggestion_sheet.submitTime >", value, "submittime");
+        public Criteria andSubmitTimeGreaterThan(Date value) {
+            addCriterion("complaint_and_suggestion_sheet.submitTime >", value, "submitTime");
             return (Criteria) this;
         }
 
-        public Criteria andSubmittimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("complaint_and_suggestion_sheet.submitTime >=", value, "submittime");
+        public Criteria andSubmitTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("complaint_and_suggestion_sheet.submitTime >=", value, "submitTime");
             return (Criteria) this;
         }
 
-        public Criteria andSubmittimeLessThan(Date value) {
-            addCriterion("complaint_and_suggestion_sheet.submitTime <", value, "submittime");
+        public Criteria andSubmitTimeLessThan(Date value) {
+            addCriterion("complaint_and_suggestion_sheet.submitTime <", value, "submitTime");
             return (Criteria) this;
         }
 
-        public Criteria andSubmittimeLessThanOrEqualTo(Date value) {
-            addCriterion("complaint_and_suggestion_sheet.submitTime <=", value, "submittime");
+        public Criteria andSubmitTimeLessThanOrEqualTo(Date value) {
+            addCriterion("complaint_and_suggestion_sheet.submitTime <=", value, "submitTime");
             return (Criteria) this;
         }
 
-        public Criteria andSubmittimeIn(List<Date> values) {
-            addCriterion("complaint_and_suggestion_sheet.submitTime in", values, "submittime");
+        public Criteria andSubmitTimeIn(List<Date> values) {
+            addCriterion("complaint_and_suggestion_sheet.submitTime in", values, "submitTime");
             return (Criteria) this;
         }
 
-        public Criteria andSubmittimeNotIn(List<Date> values) {
-            addCriterion("complaint_and_suggestion_sheet.submitTime not in", values, "submittime");
+        public Criteria andSubmitTimeNotIn(List<Date> values) {
+            addCriterion("complaint_and_suggestion_sheet.submitTime not in", values, "submitTime");
             return (Criteria) this;
         }
 
-        public Criteria andSubmittimeBetween(Date value1, Date value2) {
-            addCriterion("complaint_and_suggestion_sheet.submitTime between", value1, value2, "submittime");
+        public Criteria andSubmitTimeBetween(Date value1, Date value2) {
+            addCriterion("complaint_and_suggestion_sheet.submitTime between", value1, value2, "submitTime");
             return (Criteria) this;
         }
 
-        public Criteria andSubmittimeNotBetween(Date value1, Date value2) {
-            addCriterion("complaint_and_suggestion_sheet.submitTime not between", value1, value2, "submittime");
+        public Criteria andSubmitTimeNotBetween(Date value1, Date value2) {
+            addCriterion("complaint_and_suggestion_sheet.submitTime not between", value1, value2, "submitTime");
             return (Criteria) this;
         }
 
-        public Criteria andProcessingtimeIsNull() {
+        public Criteria andProcessingTimeIsNull() {
             addCriterion("complaint_and_suggestion_sheet.processingTime is null");
             return (Criteria) this;
         }
 
-        public Criteria andProcessingtimeIsNotNull() {
+        public Criteria andProcessingTimeIsNotNull() {
             addCriterion("complaint_and_suggestion_sheet.processingTime is not null");
             return (Criteria) this;
         }
 
-        public Criteria andProcessingtimeEqualTo(Date value) {
-            addCriterion("complaint_and_suggestion_sheet.processingTime =", value, "processingtime");
+        public Criteria andProcessingTimeEqualTo(Date value) {
+            addCriterion("complaint_and_suggestion_sheet.processingTime =", value, "processingTime");
             return (Criteria) this;
         }
 
-        public Criteria andProcessingtimeNotEqualTo(Date value) {
-            addCriterion("complaint_and_suggestion_sheet.processingTime <>", value, "processingtime");
+        public Criteria andProcessingTimeNotEqualTo(Date value) {
+            addCriterion("complaint_and_suggestion_sheet.processingTime <>", value, "processingTime");
             return (Criteria) this;
         }
 
-        public Criteria andProcessingtimeGreaterThan(Date value) {
-            addCriterion("complaint_and_suggestion_sheet.processingTime >", value, "processingtime");
+        public Criteria andProcessingTimeGreaterThan(Date value) {
+            addCriterion("complaint_and_suggestion_sheet.processingTime >", value, "processingTime");
             return (Criteria) this;
         }
 
-        public Criteria andProcessingtimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("complaint_and_suggestion_sheet.processingTime >=", value, "processingtime");
+        public Criteria andProcessingTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("complaint_and_suggestion_sheet.processingTime >=", value, "processingTime");
             return (Criteria) this;
         }
 
-        public Criteria andProcessingtimeLessThan(Date value) {
-            addCriterion("complaint_and_suggestion_sheet.processingTime <", value, "processingtime");
+        public Criteria andProcessingTimeLessThan(Date value) {
+            addCriterion("complaint_and_suggestion_sheet.processingTime <", value, "processingTime");
             return (Criteria) this;
         }
 
-        public Criteria andProcessingtimeLessThanOrEqualTo(Date value) {
-            addCriterion("complaint_and_suggestion_sheet.processingTime <=", value, "processingtime");
+        public Criteria andProcessingTimeLessThanOrEqualTo(Date value) {
+            addCriterion("complaint_and_suggestion_sheet.processingTime <=", value, "processingTime");
             return (Criteria) this;
         }
 
-        public Criteria andProcessingtimeIn(List<Date> values) {
-            addCriterion("complaint_and_suggestion_sheet.processingTime in", values, "processingtime");
+        public Criteria andProcessingTimeIn(List<Date> values) {
+            addCriterion("complaint_and_suggestion_sheet.processingTime in", values, "processingTime");
             return (Criteria) this;
         }
 
-        public Criteria andProcessingtimeNotIn(List<Date> values) {
-            addCriterion("complaint_and_suggestion_sheet.processingTime not in", values, "processingtime");
+        public Criteria andProcessingTimeNotIn(List<Date> values) {
+            addCriterion("complaint_and_suggestion_sheet.processingTime not in", values, "processingTime");
             return (Criteria) this;
         }
 
-        public Criteria andProcessingtimeBetween(Date value1, Date value2) {
-            addCriterion("complaint_and_suggestion_sheet.processingTime between", value1, value2, "processingtime");
+        public Criteria andProcessingTimeBetween(Date value1, Date value2) {
+            addCriterion("complaint_and_suggestion_sheet.processingTime between", value1, value2, "processingTime");
             return (Criteria) this;
         }
 
-        public Criteria andProcessingtimeNotBetween(Date value1, Date value2) {
-            addCriterion("complaint_and_suggestion_sheet.processingTime not between", value1, value2, "processingtime");
+        public Criteria andProcessingTimeNotBetween(Date value1, Date value2) {
+            addCriterion("complaint_and_suggestion_sheet.processingTime not between", value1, value2, "processingTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNickNameIsNull() {
+            addCriterion("complaint_and_suggestion_sheet.userNickName is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNickNameIsNotNull() {
+            addCriterion("complaint_and_suggestion_sheet.userNickName is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNickNameEqualTo(String value) {
+            addCriterion("complaint_and_suggestion_sheet.userNickName =", value, "userNickName");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNickNameNotEqualTo(String value) {
+            addCriterion("complaint_and_suggestion_sheet.userNickName <>", value, "userNickName");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNickNameGreaterThan(String value) {
+            addCriterion("complaint_and_suggestion_sheet.userNickName >", value, "userNickName");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNickNameGreaterThanOrEqualTo(String value) {
+            addCriterion("complaint_and_suggestion_sheet.userNickName >=", value, "userNickName");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNickNameLessThan(String value) {
+            addCriterion("complaint_and_suggestion_sheet.userNickName <", value, "userNickName");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNickNameLessThanOrEqualTo(String value) {
+            addCriterion("complaint_and_suggestion_sheet.userNickName <=", value, "userNickName");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNickNameLike(String value) {
+            addCriterion("complaint_and_suggestion_sheet.userNickName like", value, "userNickName");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNickNameNotLike(String value) {
+            addCriterion("complaint_and_suggestion_sheet.userNickName not like", value, "userNickName");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNickNameIn(List<String> values) {
+            addCriterion("complaint_and_suggestion_sheet.userNickName in", values, "userNickName");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNickNameNotIn(List<String> values) {
+            addCriterion("complaint_and_suggestion_sheet.userNickName not in", values, "userNickName");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNickNameBetween(String value1, String value2) {
+            addCriterion("complaint_and_suggestion_sheet.userNickName between", value1, value2, "userNickName");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserNickNameNotBetween(String value1, String value2) {
+            addCriterion("complaint_and_suggestion_sheet.userNickName not between", value1, value2, "userNickName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSheetTypeIsNull() {
+            addCriterion("complaint_and_suggestion_sheet.sheetType is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSheetTypeIsNotNull() {
+            addCriterion("complaint_and_suggestion_sheet.sheetType is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSheetTypeEqualTo(String value) {
+            addCriterion("complaint_and_suggestion_sheet.sheetType =", value, "sheetType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSheetTypeNotEqualTo(String value) {
+            addCriterion("complaint_and_suggestion_sheet.sheetType <>", value, "sheetType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSheetTypeGreaterThan(String value) {
+            addCriterion("complaint_and_suggestion_sheet.sheetType >", value, "sheetType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSheetTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("complaint_and_suggestion_sheet.sheetType >=", value, "sheetType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSheetTypeLessThan(String value) {
+            addCriterion("complaint_and_suggestion_sheet.sheetType <", value, "sheetType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSheetTypeLessThanOrEqualTo(String value) {
+            addCriterion("complaint_and_suggestion_sheet.sheetType <=", value, "sheetType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSheetTypeLike(String value) {
+            addCriterion("complaint_and_suggestion_sheet.sheetType like", value, "sheetType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSheetTypeNotLike(String value) {
+            addCriterion("complaint_and_suggestion_sheet.sheetType not like", value, "sheetType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSheetTypeIn(List<String> values) {
+            addCriterion("complaint_and_suggestion_sheet.sheetType in", values, "sheetType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSheetTypeNotIn(List<String> values) {
+            addCriterion("complaint_and_suggestion_sheet.sheetType not in", values, "sheetType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSheetTypeBetween(String value1, String value2) {
+            addCriterion("complaint_and_suggestion_sheet.sheetType between", value1, value2, "sheetType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSheetTypeNotBetween(String value1, String value2) {
+            addCriterion("complaint_and_suggestion_sheet.sheetType not between", value1, value2, "sheetType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMessageIsNull() {
+            addCriterion("complaint_and_suggestion_sheet.message is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMessageIsNotNull() {
+            addCriterion("complaint_and_suggestion_sheet.message is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMessageEqualTo(String value) {
+            addCriterion("complaint_and_suggestion_sheet.message =", value, "message");
+            return (Criteria) this;
+        }
+
+        public Criteria andMessageNotEqualTo(String value) {
+            addCriterion("complaint_and_suggestion_sheet.message <>", value, "message");
+            return (Criteria) this;
+        }
+
+        public Criteria andMessageGreaterThan(String value) {
+            addCriterion("complaint_and_suggestion_sheet.message >", value, "message");
+            return (Criteria) this;
+        }
+
+        public Criteria andMessageGreaterThanOrEqualTo(String value) {
+            addCriterion("complaint_and_suggestion_sheet.message >=", value, "message");
+            return (Criteria) this;
+        }
+
+        public Criteria andMessageLessThan(String value) {
+            addCriterion("complaint_and_suggestion_sheet.message <", value, "message");
+            return (Criteria) this;
+        }
+
+        public Criteria andMessageLessThanOrEqualTo(String value) {
+            addCriterion("complaint_and_suggestion_sheet.message <=", value, "message");
+            return (Criteria) this;
+        }
+
+        public Criteria andMessageLike(String value) {
+            addCriterion("complaint_and_suggestion_sheet.message like", value, "message");
+            return (Criteria) this;
+        }
+
+        public Criteria andMessageNotLike(String value) {
+            addCriterion("complaint_and_suggestion_sheet.message not like", value, "message");
+            return (Criteria) this;
+        }
+
+        public Criteria andMessageIn(List<String> values) {
+            addCriterion("complaint_and_suggestion_sheet.message in", values, "message");
+            return (Criteria) this;
+        }
+
+        public Criteria andMessageNotIn(List<String> values) {
+            addCriterion("complaint_and_suggestion_sheet.message not in", values, "message");
+            return (Criteria) this;
+        }
+
+        public Criteria andMessageBetween(String value1, String value2) {
+            addCriterion("complaint_and_suggestion_sheet.message between", value1, value2, "message");
+            return (Criteria) this;
+        }
+
+        public Criteria andMessageNotBetween(String value1, String value2) {
+            addCriterion("complaint_and_suggestion_sheet.message not between", value1, value2, "message");
+            return (Criteria) this;
+        }
+
+        public Criteria andTitleIsNull() {
+            addCriterion("complaint_and_suggestion_sheet.title is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTitleIsNotNull() {
+            addCriterion("complaint_and_suggestion_sheet.title is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTitleEqualTo(String value) {
+            addCriterion("complaint_and_suggestion_sheet.title =", value, "title");
+            return (Criteria) this;
+        }
+
+        public Criteria andTitleNotEqualTo(String value) {
+            addCriterion("complaint_and_suggestion_sheet.title <>", value, "title");
+            return (Criteria) this;
+        }
+
+        public Criteria andTitleGreaterThan(String value) {
+            addCriterion("complaint_and_suggestion_sheet.title >", value, "title");
+            return (Criteria) this;
+        }
+
+        public Criteria andTitleGreaterThanOrEqualTo(String value) {
+            addCriterion("complaint_and_suggestion_sheet.title >=", value, "title");
+            return (Criteria) this;
+        }
+
+        public Criteria andTitleLessThan(String value) {
+            addCriterion("complaint_and_suggestion_sheet.title <", value, "title");
+            return (Criteria) this;
+        }
+
+        public Criteria andTitleLessThanOrEqualTo(String value) {
+            addCriterion("complaint_and_suggestion_sheet.title <=", value, "title");
+            return (Criteria) this;
+        }
+
+        public Criteria andTitleLike(String value) {
+            addCriterion("complaint_and_suggestion_sheet.title like", value, "title");
+            return (Criteria) this;
+        }
+
+        public Criteria andTitleNotLike(String value) {
+            addCriterion("complaint_and_suggestion_sheet.title not like", value, "title");
+            return (Criteria) this;
+        }
+
+        public Criteria andTitleIn(List<String> values) {
+            addCriterion("complaint_and_suggestion_sheet.title in", values, "title");
+            return (Criteria) this;
+        }
+
+        public Criteria andTitleNotIn(List<String> values) {
+            addCriterion("complaint_and_suggestion_sheet.title not in", values, "title");
+            return (Criteria) this;
+        }
+
+        public Criteria andTitleBetween(String value1, String value2) {
+            addCriterion("complaint_and_suggestion_sheet.title between", value1, value2, "title");
+            return (Criteria) this;
+        }
+
+        public Criteria andTitleNotBetween(String value1, String value2) {
+            addCriterion("complaint_and_suggestion_sheet.title not between", value1, value2, "title");
             return (Criteria) this;
         }
     }

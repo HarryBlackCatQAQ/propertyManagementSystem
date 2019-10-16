@@ -21,7 +21,7 @@ public class WebsocketController {
     WebSocketServer webSocketServer;
 
     private void sendTopicMessage() {
-        System.out.println(this.template);
+//        System.out.println(this.template);
         webSocketServer.onOpen(template,"/topic/getResponse");
     }
 

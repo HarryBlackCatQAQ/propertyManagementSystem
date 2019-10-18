@@ -41,6 +41,12 @@ public interface PropertyService {
   Result findAll(Integer pageNum, Integer pageSize);
 
   /**
+   * 获取所有楼盘
+   * @return
+   */
+  Result getAllProperty();
+
+  /**
    * 获取第一个楼盘
    * @return
    */
@@ -66,5 +72,12 @@ public interface PropertyService {
    * @return
    */
   Result getByName(String propertyName);
+
+  /**
+   * 检查楼盘名字是否可用
+   * @param propertyName
+   * @return
+   */
+  Result checkPropertyName(String propertyName);
 
 }

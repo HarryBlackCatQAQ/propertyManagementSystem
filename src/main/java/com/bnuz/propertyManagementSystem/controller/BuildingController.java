@@ -8,8 +8,10 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,10 +31,22 @@ public class BuildingController {
   @Autowired
   private BuildingService buildingService;
 
-  @PutMapping(value = "insert")
+  @PostMapping(value = "insert")
   @ApiOperation("新增楼栋接口")
-  public Result insert(@RequestBody Building building){
+  public Result insert(@RequestBody Building building) {
     return buildingService.insert(building);
+  }
+
+  @DeleteMapping(value = "delete")
+  @ApiOperation("删除楼栋接口")
+  public Result delete(@RequestBody Building building) {
+    return buildingService.delete(building);
+  }
+
+  @PatchMapping(value = "update")
+  @ApiOperation("更新楼栋接口")
+  public Result update(@RequestBody Building building) {
+    return buildingService.update(building);
   }
 
   @GetMapping(value = "findAll")
@@ -53,7 +67,7 @@ public class BuildingController {
       @ApiImplicitParam(name = "propertyId", value = "楼栋Id", defaultValue = "3")
   })
   public Result findAllByPropertyId(@RequestParam Integer pageNum, Integer pageSize, Integer propertyId) {
-    return buildingService.findAllByPropertyId(pageNum - 1, pageSize, propertyId);
+    return buildingService.findAllByPropertyIdOrderByName(pageNum - 1, pageSize, propertyId);
   }
 
   @GetMapping(value = "getById")
@@ -63,6 +77,16 @@ public class BuildingController {
   })
   public Result getById(@RequestParam Integer id){
     return buildingService.getById(id);
+  }
+
+  @GetMapping(value = "checkPropertyBuildingName")
+  @ApiOperation("查询当前楼盘楼栋名字是否可用")
+  @ApiImplicitParams({
+    @ApiImplicitParam(name = "propertyId", value = "楼盘ID", defaultValue = "1"),
+    @ApiImplicitParam(name = "buildingName", value = "楼栋名称", defaultValue = "京华5栋")
+  })
+  public Result checkPropertyBuildingName(@RequestParam Integer propertyId, String buildingName) {
+    return buildingService.checkPropertyBuildingName(propertyId, buildingName);
   }
 
 }

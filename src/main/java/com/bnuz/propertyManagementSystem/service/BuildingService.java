@@ -19,6 +19,13 @@ public interface BuildingService {
   Result insert(Building building);
 
   /**
+   * 删除楼栋
+   * @param building
+   * @return
+   */
+  Result delete(Building building);
+
+  /**
    * 更新楼栋信息
    * @param building
    * @return
@@ -34,7 +41,7 @@ public interface BuildingService {
   Result findAll(Integer pageNum, Integer pageSize);
 
   /**
-   * 根据楼盘Uid获取所有楼栋并分页
+   * 根据楼盘id获取所有楼栋并分页
    * @param pageNum
    * @param pageSize
    * @param propertyId
@@ -43,10 +50,34 @@ public interface BuildingService {
   Result findAllByPropertyId(Integer pageNum, Integer pageSize, Integer propertyId);
 
   /**
+   * 根据楼盘id获取所有楼栋按名字排序并分页
+   * @param pageNum
+   * @param pageSize
+   * @param propertyId
+   * @return
+   */
+  Result findAllByPropertyIdOrderByName(Integer pageNum, Integer pageSize, Integer propertyId);
+
+  /**
    * 根据id获取楼栋
    * @param id
    * @return
    */
   Result getById(Integer id);
+
+  /**
+   * 根据名字获取楼栋
+   * @param buildingName
+   * @return
+   */
+  Result getByName(String buildingName);
+
+  /**
+   * 检查当前楼盘楼栋名字是否可用
+   * @param propertyId
+   * @param buildingName
+   * @return
+   */
+  Result checkPropertyBuildingName(Integer propertyId, String buildingName);
 
 }

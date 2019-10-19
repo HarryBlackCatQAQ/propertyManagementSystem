@@ -224,7 +224,7 @@ public class TestController {
         String path = "./logs";
         List<LogFile> list = new ArrayList<>();
 
-        dfs(path,0,list,"root");
+//        dfs(path,0,list,"root");
 
         return list;
 
@@ -294,33 +294,33 @@ public class TestController {
     @Autowired
     private LogFileService logFileService;
 
-    private void dfs(String path,int level,List<LogFile> list,String preFileName){
-        File file = new File(path);
-        File[] files = file.listFiles();
-
-
-        for(File f: files){
-            LogFile logFile = new LogFile();
-            logFile.setFileName(f.getName());
-            logFile.setPath(f.getAbsolutePath());
-            logFile.setLevel(level);
-            logFile.setPreLevelName(preFileName);
-
-            if(f.isDirectory()){
-                logFile.setIsDir(1);
-                List<LogFile> tp = new ArrayList<>();
-                logFile.setLogFileList(tp);
-                list.add(logFile);
-                logFileDao.insert(logFile);
-                dfs(f.getAbsolutePath(),level + 1,tp,f.getName());
-            }
-            else{
-                logFile.setIsDir(0);
-                list.add(logFile);
-                logFileDao.insert(logFile);
-            }
-        }
-    }
+//    private void dfs(String path,int level,List<LogFile> list,String preFileName){
+//        File file = new File(path);
+//        File[] files = file.listFiles();
+//
+//
+//        for(File f: files){
+//            LogFile logFile = new LogFile();
+//            logFile.setFileName(f.getName());
+//            logFile.setPath(f.getAbsolutePath());
+//            logFile.setLevel(level);
+//            logFile.setPreLevelName(preFileName);
+//
+//            if(f.isDirectory()){
+//                logFile.setIsDir(1);
+//                List<LogFile> tp = new ArrayList<>();
+//                logFile.setLogFileList(tp);
+//                list.add(logFile);
+//                logFileDao.insert(logFile);
+//                dfs(f.getAbsolutePath(),level + 1,tp,f.getName());
+//            }
+//            else{
+//                logFile.setIsDir(0);
+//                list.add(logFile);
+//                logFileDao.insert(logFile);
+//            }
+//        }
+//    }
 
 //    public static void dfs(String path,int level,List<LogFile> list,String preFileName){
 //        File file = new File(path);

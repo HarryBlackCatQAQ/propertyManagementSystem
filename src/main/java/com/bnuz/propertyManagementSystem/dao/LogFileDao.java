@@ -15,4 +15,8 @@ public interface LogFileDao extends MyBatisBaseDao<LogFile, Integer, LogFileExam
 
     @Select("SELECT * FROM log_file WHERE preLevelName = #{preLevelName} ")
     public List<LogFile> getLogFileByPreFileName(String preLevelName);
+
+
+    @Select("SELECT * FROM log_file")
+    public List<LogFile> getAllLogFile();
 }

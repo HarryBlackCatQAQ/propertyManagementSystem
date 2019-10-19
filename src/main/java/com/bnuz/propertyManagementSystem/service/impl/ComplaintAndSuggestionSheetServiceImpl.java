@@ -76,6 +76,12 @@ public class ComplaintAndSuggestionSheetServiceImpl implements ComplaintAndSugge
     }
 
     @Override
+    public Result delComplaintAndSuggestionSheet(ComplaintAndSuggestionSheet complaintAndSuggestionSheet) {
+        complaintAndSuggestionSheetDao.deleteByPrimaryKey(complaintAndSuggestionSheet.getId());
+        return new Result(true,ResultStatusCode.OK,"删除成功!");
+    }
+
+    @Override
     public Result updateComplaintAndSuggestionSheet() {
         return null;
     }

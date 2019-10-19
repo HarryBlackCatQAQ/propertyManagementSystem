@@ -137,7 +137,7 @@ public class FileUtil {
      * @param path
      * @return 返回是否删除成功
      */
-    public boolean delAllFile(String path) {
+    private boolean delAllFile(String path) {
         boolean flag = false;
         File file = new File(path);
         if (!file.exists()) {
@@ -171,6 +171,11 @@ public class FileUtil {
         return flag;
     }
 
+    /**
+     * 删除文件
+     * @param path
+     * @return
+     */
     public boolean delFile(String path){
         boolean flag = false;
         File file = new File(path);
@@ -181,6 +186,12 @@ public class FileUtil {
         return true;
     }
 
+    /**
+     * 复制文件
+     * @param oldPath
+     * @param newPath
+     * @param mkdirPath
+     */
     public void copyFile(String oldPath, String newPath,String mkdirPath) {
         InputStream inStream = null;
         FileOutputStream fs = null;
@@ -274,6 +285,12 @@ public class FileUtil {
 
     }
 
+    /**
+     * 用于下载文件
+     * @param response
+     * @param filename
+     * @param filepath
+     */
     public void downFile(HttpServletResponse response,String filename,String filepath){
         boolean flag = false;
         if (filename != null) {

@@ -50,7 +50,8 @@ public class ComplaintAndSuggestionSheetServiceImpl implements ComplaintAndSugge
 
         ComplaintAndSuggestionSheetTimeline timeline = new ComplaintAndSuggestionSheetTimeline();
 
-        timeline.setMessage(complaintAndSuggestionSheet.getMessage());
+//        timeline.setMessage(complaintAndSuggestionSheet.getMessage());
+        timeline.setMessage("用户第一次提交！");
         timeline.setProcessingTime(now);
         timeline.setProcessingUserNickName(complaintAndSuggestionSheet.getUserNickName());
         timeline.setSheetId(complaintAndSuggestionSheet.getId());

@@ -24,6 +24,16 @@ public class ValidateCodeServiceImpl implements ValidateCodeService {
     @Autowired
     RedisUtil redisUtil;
 
+
+    @Override
+    public void saveValidateCodeInRedis(String code,String ip) {
+        if(ip.equals("0:0:0:0:0:0:0:1")){
+            ip = "127.0.0.1";
+        }
+
+        redisUtil.set(VALIDATE_CODE_PER + ip,code,60);
+    }
+
     /**
      * 默认60秒s
      * @return
@@ -37,6 +47,7 @@ public class ValidateCodeServiceImpl implements ValidateCodeService {
     public ImageCode createImageCode(int seconds) {
         return createImageCodeImpl(seconds);
     }
+
 
     /**
      * 生成验证码图片

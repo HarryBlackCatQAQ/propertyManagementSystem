@@ -5,6 +5,7 @@ import com.bnuz.propertyManagementSystem.model.LogFile;
 import com.bnuz.propertyManagementSystem.model.Result;
 import com.bnuz.propertyManagementSystem.model.ResultStatusCode;
 import com.bnuz.propertyManagementSystem.service.LogFileService;
+import com.bnuz.propertyManagementSystem.service.scheduling.LogFileScheduling;
 import com.bnuz.propertyManagementSystem.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,9 @@ public class LogFileServiceImpl implements LogFileService {
 
     @Autowired
     private FileUtil fileUtil;
+
+    @Autowired
+    private LogFileScheduling logFileScheduling;
 
     @Override
     public Result getLogFileList(String preLevelName) {
@@ -64,5 +68,11 @@ public class LogFileServiceImpl implements LogFileService {
             fileUtil.delFile("./logs/日志.zip");
         }
         return new Result();
+    }
+
+    @Override
+    public Result updateLogFile() {
+        logFileScheduling.schedulingInsertLogFile();;
+        return new Result(true,ResultStatusCode.OK,"更新成功!");
     }
 }

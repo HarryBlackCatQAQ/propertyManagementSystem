@@ -48,4 +48,10 @@ public interface ResultStatusCode {
      */
     public static final int TOEKNERROR = 40006;
     public static final String TOEKNERROR_MES = "token错误或者失效";
+
+    /**
+     * 验证码错误
+     */
+    public static final int VALIDATE_CODE_ERROR = 40007;
+    public static final String VALIDATE_CODE_ERROR_MES = "验证码错误";
 }

@@ -1,14 +1,20 @@
 package com.bnuz.propertyManagementSystem.filter.springsecurity;
 
 import com.alibaba.fastjson.JSON;
+import com.bnuz.propertyManagementSystem.dto.UserLoginDto;
 import com.bnuz.propertyManagementSystem.model.Result;
 import com.bnuz.propertyManagementSystem.model.ResultStatusCode;
 import com.bnuz.propertyManagementSystem.model.User;
+import com.bnuz.propertyManagementSystem.service.ValidateCodeService;
 import com.bnuz.propertyManagementSystem.service.redis.JWTRedisService;
+import com.bnuz.propertyManagementSystem.service.redis.LoginFailureTimesService;
+import com.bnuz.propertyManagementSystem.service.redis.UserLoginDtoService;
 import com.bnuz.propertyManagementSystem.util.JwtTokenUtils;
 import com.bnuz.propertyManagementSystem.springsecurity.JwtUser;
+import com.bnuz.propertyManagementSystem.util.RedisUtil;
 import com.bnuz.propertyManagementSystem.util.SpringUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.org.apache.regexp.internal.RE;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -53,16 +59,13 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException {
 
-        // 从输入流中获取到登录的信息
-        try {
-            User loginUser = new ObjectMapper().readValue(request.getInputStream(), User.class);
-            return authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginUser.getUsername(), loginUser.getPassword(), new ArrayList<>())
-            );
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+        RedisUtil redisUtil = SpringUtil.getBean(RedisUtil.class);
+        String key = (String) redisUtil.get(UserLoginDtoService.UserLoginDtoRedisPre + request.getRemoteAddr());
+        UserLoginDto loginUser = JSON.parseObject(key,UserLoginDto.class);
+
+        return authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginUser.getUsername(), loginUser.getPassword(), new ArrayList<>())
+        );
     }
 
     /**
@@ -71,14 +74,12 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
      * @param response
      * @param chain
      * @param authResult
-     * @throws IOException
-     * @throws ServletException
      */
     @Override
     protected void successfulAuthentication(HttpServletRequest request,
                                             HttpServletResponse response,
                                             FilterChain chain,
-                                            Authentication authResult) throws IOException, ServletException {
+                                            Authentication authResult) {
 
         // 查看源代码会发现调用getPrincipal()方法会返回一个实现了`UserDetails`接口的对象
         // 所以就是JwtUser啦
@@ -93,10 +94,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.setHeader("token", token);
         response.setHeader("Access-Control-Expose-Headers", "token");
 
-
         Result result = new Result(true, ResultStatusCode.OK,"login success",jwtUser);
-        String json = JSON.toJSONString(result);
-        response.getWriter().write(json);
+
+        writeResponse(response,result);
     }
 
     /**
@@ -146,14 +146,30 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
      * @param request
      * @param response
      * @param failed
-     * @throws IOException
-     * @throws ServletException
      */
     @Override
-    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
-        Result result = new Result(false, ResultStatusCode.LOGINERROR,"username or password is wrong!");
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed){
+        Result result;
 
+        LoginFailureTimesService loginFailureTimesService = SpringUtil.getBean(LoginFailureTimesService.class);
+        String ip = request.getRemoteAddr();
+
+        if(loginFailureTimesService.checkIpLoginTimes(ip)){
+            result = new Result(false, ResultStatusCode.REPERROR,"username or password is wrong! login Fail more than 5 times!");
+        }
+        else{
+            result = new Result(false, ResultStatusCode.LOGINERROR,"username or password is wrong!");
+        }
+
+        writeResponse(response,result);
+    }
+
+    private void writeResponse(HttpServletResponse response,Result result) {
         String json = JSON.toJSONString(result);
-        response.getWriter().write(json);
+        try {
+            response.getWriter().write(json);
+        } catch (IOException e) {
+            log.error("response 响应出错啦！" + e.toString());
+        }
     }
 }

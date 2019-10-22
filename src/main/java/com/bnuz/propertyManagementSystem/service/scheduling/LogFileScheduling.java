@@ -47,7 +47,10 @@ public class LogFileScheduling {
                 }
             }
             if(!flag){
-                logFileDao.insert(logFile);
+                if(!logFile.getFileName().equals(".DS_Store")){
+                    logFileDao.insert(logFile);
+                }
+
             }
 
             if(logFile.getLogFileList() != null){

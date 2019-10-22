@@ -10,4 +10,6 @@ public interface LogFileService {
     public Result getLogFileList(String preLevelName);
 
     public Result downLoadLogFile(List<LogFile> list, HttpServletResponse response);
+
+    public Result updateLogFile();
 }

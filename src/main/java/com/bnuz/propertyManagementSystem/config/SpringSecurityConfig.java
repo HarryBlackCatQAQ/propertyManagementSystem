@@ -1,9 +1,6 @@
 package com.bnuz.propertyManagementSystem.config;
 
-import com.bnuz.propertyManagementSystem.filter.springsecurity.JWTAuthenticationFilter;
-import com.bnuz.propertyManagementSystem.filter.springsecurity.JWTAuthorizationFilter;
-import com.bnuz.propertyManagementSystem.filter.springsecurity.JWTLogoutFilter;
-import com.bnuz.propertyManagementSystem.filter.springsecurity.TokenClearLogoutHandler;
+import com.bnuz.propertyManagementSystem.filter.springsecurity.*;
 import com.bnuz.propertyManagementSystem.service.springsecurity.impl.MyUserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -15,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -82,6 +80,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 //添加过滤器
                 //登录认证过滤器
+                .addFilterBefore(new ValidateCodeFilter(), UsernamePasswordAuthenticationFilter.class)
                 .addFilter(new JWTAuthenticationFilter(authenticationManagerBean()))
                 //用户api授权过滤器
                 .addFilter(new JWTAuthorizationFilter(authenticationManagerBean()))

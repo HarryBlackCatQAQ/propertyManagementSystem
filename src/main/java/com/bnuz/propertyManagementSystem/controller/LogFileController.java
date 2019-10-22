@@ -35,4 +35,10 @@ public class LogFileController {
     public void downLoadLogFile(@RequestBody List<LogFile> list, HttpServletResponse response){
         logFileService.downLoadLogFile(list,response);
     }
+
+    @GetMapping("/updateLogFile")
+    @ApiOperation("手动更新本地日志")
+    public Result updateLogFile(){
+        return logFileService.updateLogFile();
+    }
 }

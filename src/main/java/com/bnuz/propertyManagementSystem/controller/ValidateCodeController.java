@@ -41,11 +41,23 @@ public class ValidateCodeController {
 
         ImageCode imageCode = validateCodeService.createImageCode();
 
-        validateCodeService.saveValidateCodeInRedis(imageCode.getCode(),request.getRemoteAddr());
+        HttpSession session = request.getSession();
+        validateCodeService.saveValidateCodeInRedis(imageCode.getCode(),session.getId());
+
+
+//        HttpSession session = request.getSession();
+//        System.err.println(session.getId());
+//        System.err.println(imageCode.getCode());
 
         ImageIO.write(imageCode.getImage(),"JPEG",response.getOutputStream());//写到相应的输出流中 中间是格式
     }
-    
+
+    @GetMapping("/code/image1")
+    public String createCode2(HttpServletResponse response, HttpServletRequest request) throws IOException{
+        HttpSession session = request.getSession();
+        System.err.println(session.getId());
+        return session.getId();
+    }
 
 
 }

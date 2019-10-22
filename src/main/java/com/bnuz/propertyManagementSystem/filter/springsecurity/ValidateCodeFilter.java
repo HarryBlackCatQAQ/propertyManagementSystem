@@ -23,6 +23,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -40,14 +41,17 @@ public class ValidateCodeFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         if(StringUtils.equals("/auth/login", httpServletRequest.getRequestURI())
                 && StringUtils.equalsIgnoreCase(httpServletRequest.getMethod(), "post")) {
+            HttpSession session = httpServletRequest.getSession();
 
             UserLoginDto loginUser = new ObjectMapper().readValue(httpServletRequest.getInputStream(), UserLoginDto.class);
             UserLoginDtoService userLoginDtoService = SpringUtil.getBean(UserLoginDtoService.class);
-            userLoginDtoService.save(loginUser,httpServletRequest.getRemoteAddr());
+            userLoginDtoService.save(loginUser,session.getId());
 
 //            System.err.println(loginUser);
 
-            String ip = httpServletRequest.getRemoteAddr();
+//            String ip = httpServletRequest.getRemoteAddr();
+
+            String ip = session.getId();
             if(isCheckValidateCode(ip)){
                 if(!checkValidateCode(ip,loginUser)){
                     Result result = new Result(false, ResultStatusCode.VALIDATE_CODE_ERROR,"ValidateCode error!");

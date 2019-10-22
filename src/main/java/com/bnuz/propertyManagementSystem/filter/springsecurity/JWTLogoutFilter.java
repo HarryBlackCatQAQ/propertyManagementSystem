@@ -18,6 +18,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -63,7 +64,10 @@ public class JWTLogoutFilter extends LogoutFilter {
             log.info("" + flag);
 
             LoginFailureTimesService loginFailureTimesService = SpringUtil.getBean(LoginFailureTimesService.class);
-            loginFailureTimesService.delLoginFailTimes(request.getRemoteAddr());
+            HttpSession session = request.getSession();
+
+            loginFailureTimesService.delLoginFailTimes(session.getId());
+//            loginFailureTimesService.delLoginFailTimes(request.getRemoteAddr());
 
             Result result = new Result(true, ResultStatusCode.OK,"logout success");
             String json = JSON.toJSONString(result);

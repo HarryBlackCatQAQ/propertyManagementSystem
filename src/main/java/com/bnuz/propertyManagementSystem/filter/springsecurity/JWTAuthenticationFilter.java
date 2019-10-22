@@ -27,6 +27,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -60,7 +61,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                                 HttpServletResponse response) throws AuthenticationException {
 
         RedisUtil redisUtil = SpringUtil.getBean(RedisUtil.class);
-        String key = (String) redisUtil.get(UserLoginDtoService.UserLoginDtoRedisPre + request.getRemoteAddr());
+        HttpSession session = request.getSession();
+//        String key = (String) redisUtil.get(UserLoginDtoService.UserLoginDtoRedisPre + request.getRemoteAddr());
+        String key = (String) redisUtil.get(UserLoginDtoService.UserLoginDtoRedisPre + session.getId());
         UserLoginDto loginUser = JSON.parseObject(key,UserLoginDto.class);
 
         return authenticationManager.authenticate(
@@ -152,7 +155,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         Result result;
 
         LoginFailureTimesService loginFailureTimesService = SpringUtil.getBean(LoginFailureTimesService.class);
-        String ip = request.getRemoteAddr();
+        HttpSession session = request.getSession();
+//        String ip = request.getRemoteAddr();
+        String ip = session.getId();
 
         if(loginFailureTimesService.checkIpLoginTimes(ip)){
             result = new Result(false, ResultStatusCode.REPERROR,"username or password is wrong! login Fail more than 5 times!");

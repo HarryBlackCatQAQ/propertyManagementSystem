@@ -61,7 +61,7 @@ public class HouseServiceImpl implements HouseService {
   @Transactional(readOnly = true)
   public Result findAllByBuildingId(Integer pageNum, Integer pageSize, Integer buildingId) {
     Pageable pageable = PageRequest.of(pageNum, pageSize);
-    Page page = houseDao.findAllByBuildingId(pageable, buildingId);
+    Page page = houseDao.findAllByBuildingId(buildingId, pageable);
     return new Result(true, ResultStatusCode.OK, "查询成功", page);
   }
 
@@ -74,9 +74,12 @@ public class HouseServiceImpl implements HouseService {
 
   @Override
   @Transactional(readOnly = true)
-  public Result getByBuildingIdAndNumber(Integer buildingId, Integer number) {
+  public Result checkBuildingHouseNumber(Integer buildingId, Integer number) {
     House house = houseDao.getByBuildingIdAndNumber(buildingId, number);
-    return new Result(true, ResultStatusCode.OK, "查询成功", house);
+    if(house != null) {
+      return new Result(false, ResultStatusCode.OK, "房屋门牌号已存在");
+    }
+    return new Result(true, ResultStatusCode.OK, "房屋门牌号可用");
   }
 
 }

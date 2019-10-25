@@ -57,11 +57,11 @@ public interface HouseService {
   Result getById(Integer id);
 
   /**
-   * 根据楼栋Uid和门牌号查找房屋
+   * 检查当前楼栋房屋门牌号是否可用
    * @param buildingId
    * @param number
    * @return
    */
-  Result getByBuildingIdAndNumber(Integer buildingId, Integer number);
+  Result checkBuildingHouseNumber(Integer buildingId, Integer number);
 
 }

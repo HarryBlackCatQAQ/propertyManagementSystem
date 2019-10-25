@@ -18,7 +18,13 @@ public interface BuildingDao extends JpaRepository<Building, Integer> {
 
   Page<Building> findAllByPropertyId(Pageable pageable, Integer propertyId);
 
+  List<Building> findAllByOrderByName();
+
+  List<Building> findAllByPropertyIdOrderByName(Integer propertyId);
+
   Building getById(Integer id);
+
+  Building getFirstByPropertyId(Integer propertyId);
 
   Building getByName(String buildingName);
 

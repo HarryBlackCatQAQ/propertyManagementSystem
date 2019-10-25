@@ -41,6 +41,12 @@ public interface BuildingService {
   Result findAll(Integer pageNum, Integer pageSize);
 
   /**
+   * 获取所有楼栋
+   * @return
+   */
+  Result findAll();
+
+  /**
    * 根据楼盘id获取所有楼栋并分页
    * @param pageNum
    * @param pageSize
@@ -48,6 +54,13 @@ public interface BuildingService {
    * @return
    */
   Result findAllByPropertyId(Integer pageNum, Integer pageSize, Integer propertyId);
+
+  /**
+   * 根据楼盘id获取所有楼栋按名字排序
+   * @param propertyId
+   * @return
+   */
+  Result findAllByPropertyIdOrderByName(Integer propertyId);
 
   /**
    * 根据楼盘id获取所有楼栋按名字排序并分页
@@ -64,6 +77,13 @@ public interface BuildingService {
    * @return
    */
   Result getById(Integer id);
+
+  /**
+   * 根据楼盘id获取第一个楼栋
+   * @param propertyId
+   * @return
+   */
+  Result getFirstByPropertyId(Integer propertyId);
 
   /**
    * 根据名字获取楼栋

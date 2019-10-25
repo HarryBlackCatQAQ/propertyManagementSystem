@@ -5,6 +5,7 @@ import com.bnuz.propertyManagementSystem.model.Building;
 import com.bnuz.propertyManagementSystem.model.Result;
 import com.bnuz.propertyManagementSystem.model.ResultStatusCode;
 import com.bnuz.propertyManagementSystem.service.BuildingService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -53,6 +54,13 @@ public class BuildingServiceImpl implements BuildingService {
 
   @Override
   @Transactional(readOnly = true)
+  public Result findAll() {
+    List<Building> buildings = buildingDao.findAllByOrderByName();
+    return new Result(true, ResultStatusCode.OK, "查询成功", buildings);
+  }
+
+  @Override
+  @Transactional(readOnly = true)
   public Result findAll(Integer pageNum, Integer pageSize) {
     Pageable pageable = PageRequest.of(pageNum, pageSize);
     Page page = buildingDao.findAll(pageable);
@@ -69,6 +77,13 @@ public class BuildingServiceImpl implements BuildingService {
 
   @Override
   @Transactional(readOnly = true)
+  public Result findAllByPropertyIdOrderByName(Integer propertyId) {
+    List<Building> buildings = buildingDao.findAllByPropertyIdOrderByName(propertyId);
+    return new Result(true, ResultStatusCode.OK, "查询成功", buildings);
+  }
+
+  @Override
+  @Transactional(readOnly = true)
   public Result findAllByPropertyIdOrderByName(Integer pageNum, Integer pageSize,
       Integer propertyId) {
     Sort sort = new Sort(Direction.ASC, "name");
@@ -81,6 +96,13 @@ public class BuildingServiceImpl implements BuildingService {
   @Transactional(readOnly = true)
   public Result getById(Integer id) {
     Building building = buildingDao.getById(id);
+    return new Result(true, ResultStatusCode.OK, "查询成功", building);
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public Result getFirstByPropertyId(Integer propertyId) {
+    Building building = buildingDao.getFirstByPropertyId(propertyId);
     return new Result(true, ResultStatusCode.OK, "查询成功", building);
   }
 

@@ -64,10 +64,25 @@ public class BuildingController {
   @ApiImplicitParams({
       @ApiImplicitParam(name = "pageNum", value = "用户列表页码", defaultValue = "1"),
       @ApiImplicitParam(name = "pageSize", value = "每页条数", defaultValue = "10"),
-      @ApiImplicitParam(name = "propertyId", value = "楼栋Id", defaultValue = "3")
+      @ApiImplicitParam(name = "propertyId", value = "楼盘Id", defaultValue = "3")
   })
   public Result findAllByPropertyId(@RequestParam Integer pageNum, Integer pageSize, Integer propertyId) {
     return buildingService.findAllByPropertyIdOrderByName(pageNum - 1, pageSize, propertyId);
+  }
+
+  @GetMapping(value = "getAllBuildings")
+  @ApiOperation("获取所有楼栋接口")
+  public Result getAllBuildings() {
+    return buildingService.findAll();
+  }
+
+  @GetMapping(value = "getAllBuildingByPropertyId")
+  @ApiOperation("根据楼盘Id获取所有楼栋接口")
+  @ApiImplicitParams({
+      @ApiImplicitParam(name = "propertyId", value = "楼盘Id", defaultValue = "3")
+  })
+  public Result getAllBuildingByPropertyId(@RequestParam Integer propertyId) {
+    return buildingService.findAllByPropertyIdOrderByName(propertyId);
   }
 
   @GetMapping(value = "getById")
@@ -79,8 +94,18 @@ public class BuildingController {
     return buildingService.getById(id);
   }
 
+  @GetMapping(value = "getFirstByPropertyId")
+  @ApiOperation("根据楼盘id查询第一个楼栋接口")
+  @ApiImplicitParams({
+      @ApiImplicitParam(name = "propertyId", value = "楼盘ID", defaultValue = "1"),
+  })
+  public Result getFirstByPropertyId(@RequestParam Integer propertyId) {
+    return buildingService.getFirstByPropertyId(propertyId);
+  }
+
+
   @GetMapping(value = "checkPropertyBuildingName")
-  @ApiOperation("查询当前楼盘楼栋名字是否可用")
+  @ApiOperation("查询当前楼盘楼栋名字是否可用接口")
   @ApiImplicitParams({
     @ApiImplicitParam(name = "propertyId", value = "楼盘ID", defaultValue = "1"),
     @ApiImplicitParam(name = "buildingName", value = "楼栋名称", defaultValue = "京华5栋")

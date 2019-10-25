@@ -66,7 +66,7 @@ public class HouseController {
     @ApiImplicitParam(name = "pageSize", value = "每页条数", defaultValue = "10"),
     @ApiImplicitParam(name = "buildingId", value = "楼栋Id", defaultValue = "2")
   })
-  public Result findAllByBuildingUid(@RequestParam Integer pageNum, Integer pageSize, Integer buildingId) {
+  public Result findAllByBuildingId(@RequestParam Integer pageNum, Integer pageSize, Integer buildingId) {
     return houseService.findAllByBuildingId(pageNum - 1, pageSize, buildingId);
   }
 
@@ -79,14 +79,14 @@ public class HouseController {
     return houseService.getById(id);
   }
 
-  @GetMapping(value = "getByBuildingIdAndNumber")
-  @ApiOperation("根据楼栋Id和房屋门牌号获取房屋接口")
+  @GetMapping(value = "checkBuildingHouseNumber")
+  @ApiOperation("查询当前楼栋房屋门牌号是否可用接口")
   @ApiImplicitParams({
       @ApiImplicitParam(name = "buildingId", value = "楼栋Id", defaultValue = "2"),
       @ApiImplicitParam(name = "number", value = "房屋门牌号", defaultValue = "322")
   })
-  public Result getByBuildingUidAndNumber(@RequestParam Integer buildingId, @RequestParam Integer number) {
-    return houseService.getByBuildingIdAndNumber(buildingId, number);
+  public Result checkBuildingHouseNumber(@RequestParam Integer buildingId, Integer number) {
+    return houseService.checkBuildingHouseNumber(buildingId, number);
   }
 
 }

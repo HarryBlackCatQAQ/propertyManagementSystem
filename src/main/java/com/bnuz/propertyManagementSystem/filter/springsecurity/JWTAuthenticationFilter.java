@@ -66,6 +66,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String key = (String) redisUtil.get(UserLoginDtoService.UserLoginDtoRedisPre + session.getId());
         UserLoginDto loginUser = JSON.parseObject(key,UserLoginDto.class);
 
+//        System.out.println("l:" + loginUser);
+
         return authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginUser.getUsername(), loginUser.getPassword(), new ArrayList<>())
         );

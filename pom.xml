@@ -14,6 +14,8 @@
     <name>propertyManagementSystem</name>
     <description>Demo project for Spring Boot</description>
 
+    <packaging>war</packaging>
+
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -22,7 +24,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+
+
         </dependency>
+
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -148,13 +154,26 @@
             <version>3.11.4</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.zeroturnaround/zt-zip -->
+        <!-- zt-zip文件压缩 -->
         <dependency>
             <groupId>org.zeroturnaround</groupId>
             <artifactId>zt-zip</artifactId>
             <version>1.13</version>
         </dependency>
 
+        <!-- 感谢niezhiliang 开源支持 (微信、支付宝支付) https://github.com/easy-pay/easy-pay -->
+        <dependency>
+            <groupId>com.niezhiliang.easy.pay</groupId>
+            <artifactId>easy-pay</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
+        <!-- 二维码生成 -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>3.3.0</version>
+        </dependency>
 
     </dependencies>
 

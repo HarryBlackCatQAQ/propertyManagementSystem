@@ -12,7 +12,7 @@ import com.bnuz.propertyManagementSystem.service.UserService;
 import com.bnuz.propertyManagementSystem.util.FileUtil;
 import io.swagger.annotations.Api;
 import io.swagger.models.auth.In;
-import org.apache.catalina.webresources.FileResource;
+//import org.apache.catalina.webresources.FileResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -187,37 +187,37 @@ public class TestController {
 //        }
     }
 
-    public static void main(String[] args) {
-//        String path = "./logs";
-////        File file = new File(path);
-////        File[] files = file.listFiles();
-////        System.out.println(file);
-////        System.out.println(files);
-////        System.out.println(files.length);
-////        for (File f : files) {
-////            if (f.isDirectory()) {
-////                String dir = f.getName();
-////                System.err.println(dir);
-////                System.err.println(f.getAbsolutePath());
-////            } else {
-////                System.out.println(f.getName());
+//    public static void main(String[] args) {
+////        String path = "./logs";
+//////        File file = new File(path);
+//////        File[] files = file.listFiles();
+//////        System.out.println(file);
+//////        System.out.println(files);
+//////        System.out.println(files.length);
+//////        for (File f : files) {
+//////            if (f.isDirectory()) {
+//////                String dir = f.getName();
+//////                System.err.println(dir);
+//////                System.err.println(f.getAbsolutePath());
+//////            } else {
+//////                System.out.println(f.getName());
+//////            }
+//////        }
+////
+////        List<LogFile> list = new ArrayList<>();
+////
+////        dfs(path,0,list,"root");
+////
+////        for(LogFile logFile: list){
+////            if(logFile.getIsDir() == 1){
+////                System.out.println(logFile);
+////            }
+////            else{
+////                System.err.println(logFile);
 ////            }
 ////        }
 //
-//        List<LogFile> list = new ArrayList<>();
-//
-//        dfs(path,0,list,"root");
-//
-//        for(LogFile logFile: list){
-//            if(logFile.getIsDir() == 1){
-//                System.out.println(logFile);
-//            }
-//            else{
-//                System.err.println(logFile);
-//            }
-//        }
-
-    }
+//    }
 
     @GetMapping("/log")
     public Object log(){

@@ -1,7 +1,6 @@
 package com.bnuz.propertyManagementSystem.dao;
 
 import com.bnuz.propertyManagementSystem.model.Property;
-import com.bnuz.propertyManagementSystem.model.PropertyExample;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

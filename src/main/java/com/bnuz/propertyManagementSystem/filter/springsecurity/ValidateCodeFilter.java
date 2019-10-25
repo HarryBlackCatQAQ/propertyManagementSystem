@@ -39,7 +39,8 @@ public class ValidateCodeFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-        if(StringUtils.equals("/auth/login", httpServletRequest.getRequestURI())
+        if((StringUtils.equals("/auth/login", httpServletRequest.getRequestURI()) ||
+                StringUtils.equals("/PropertyManagementSystem/auth/login", httpServletRequest.getRequestURI()))
                 && StringUtils.equalsIgnoreCase(httpServletRequest.getMethod(), "post")) {
             HttpSession session = httpServletRequest.getSession();
 
@@ -47,7 +48,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter {
             UserLoginDtoService userLoginDtoService = SpringUtil.getBean(UserLoginDtoService.class);
             userLoginDtoService.save(loginUser,session.getId());
 
-//            System.err.println(loginUser);
+//            System.err.println("@@@@:" + loginUser);
 
 //            String ip = httpServletRequest.getRemoteAddr();
 

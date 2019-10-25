@@ -20,4 +20,6 @@ public interface BuildingDao extends JpaRepository<Building, Integer> {
 
   Building getById(Integer id);
 
+
+
 }

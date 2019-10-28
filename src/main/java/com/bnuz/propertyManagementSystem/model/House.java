@@ -48,6 +48,9 @@ public class House {
   @ApiModelProperty(value = "所属楼栋ID", example = "2")
   private Integer buildingId; //所属楼栋ID
 
+  @ApiModelProperty(value = "用户ID")
+  private Integer userId;
+
   @ManyToOne
   @JoinColumn(name = "buildingId", insertable = false ,updatable = false)
   @JsonIgnore

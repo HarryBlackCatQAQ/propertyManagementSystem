@@ -61,7 +61,7 @@ public class HouseServiceImpl implements HouseService {
   @Transactional(readOnly = true)
   public Result findAllByBuildingId(Integer pageNum, Integer pageSize, Integer buildingId) {
     Pageable pageable = PageRequest.of(pageNum, pageSize);
-    Page page = houseDao.findAllByBuildingId(buildingId, pageable);
+    Page page = houseDao.findAllByBuildingIdOrderByNumber(buildingId, pageable);
     return new Result(true, ResultStatusCode.OK, "查询成功", page);
   }
 

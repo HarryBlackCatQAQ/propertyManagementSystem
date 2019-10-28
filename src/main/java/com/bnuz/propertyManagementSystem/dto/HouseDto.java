@@ -17,8 +17,20 @@ public class HouseDto {
 
   private Integer buildingId; //所属楼栋ID
 
-  private Integer userId;
+  private Integer userId; //业主ID
 
-  private String nickName; //业主名字
+  private String ownerName; //业主名字
+
+  public HouseDto(Integer id, Integer number, Double area, String direction, Integer floor,
+      Integer buildingId, Integer userId, String ownerName) {
+    this.id = id;
+    this.number = number;
+    this.area = area;
+    this.direction = direction;
+    this.floor = floor;
+    this.buildingId = buildingId;
+    this.userId = userId;
+    this.ownerName = ownerName;
+  }
 
 }

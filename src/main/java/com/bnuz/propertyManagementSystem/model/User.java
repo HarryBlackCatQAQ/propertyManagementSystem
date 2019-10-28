@@ -4,16 +4,20 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  * user
  * @author 
  */
 @ApiModel
+@Entity
 public class User implements Serializable {
     /**
      * userID
      */
+    @Id
     @ApiModelProperty(value = "userID")
     private Integer id;
 

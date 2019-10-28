@@ -16,9 +16,10 @@ public interface HouseDao extends JpaRepository<House, Integer> {
 
   Page<House> findAll(Pageable pageable);
 
-  @Query(value = "select h.id, h.number, h.area, h.direction, h.floor, "
-      + "h.buildingId, h.userId, u.nickName from house h,user u where h.userId = u.id and h.buildingId = ?1", nativeQuery = true)
-  Page<HouseDto> findAllByBuildingId(Integer buildingId, Pageable pageable);
+  @Query("select new com.bnuz.propertyManagementSystem.dto.HouseDto(h.id, h.number, h.area, h.direction, h.floor, "
+      + "h.buildingId, h.userId, u.nickname) "
+      + "from House h,User u where h.userId = u.id and h.buildingId = :buildingId order by h.number asc ")
+  Page<HouseDto> findAllByBuildingIdOrderByNumber(Integer buildingId, Pageable pageable);
 
   House getById(Integer id);
 

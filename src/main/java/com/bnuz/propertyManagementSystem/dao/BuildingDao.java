@@ -30,4 +30,6 @@ public interface BuildingDao extends JpaRepository<Building, Integer> {
 
   Building getByNameAndPropertyId(String buildingName, Integer propertyId);
 
+
+
 }

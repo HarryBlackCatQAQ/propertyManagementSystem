@@ -1,18 +1,30 @@
 package com.bnuz.propertyManagementSystem.controller;
 
 import com.bnuz.propertyManagementSystem.dao.ComplaintAndSuggestionSheetDao;
+import com.bnuz.propertyManagementSystem.dao.LogFileDao;
 import com.bnuz.propertyManagementSystem.dao.UserDao;
 import com.bnuz.propertyManagementSystem.model.ComplaintAndSuggestionSheet;
+import com.bnuz.propertyManagementSystem.model.LogFile;
 import com.bnuz.propertyManagementSystem.model.User;
 import com.bnuz.propertyManagementSystem.redisson.DistributedLocker;
+import com.bnuz.propertyManagementSystem.service.LogFileService;
 import com.bnuz.propertyManagementSystem.service.UserService;
+import com.bnuz.propertyManagementSystem.util.FileUtil;
 import io.swagger.annotations.Api;
+import io.swagger.models.auth.In;
+//import org.apache.catalina.webresources.FileResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.zeroturnaround.zip.FileSource;
+import org.zeroturnaround.zip.ZipEntrySource;
+import org.zeroturnaround.zip.ZipUtil;
 
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -174,6 +186,168 @@ public class TestController {
 //
 //        }
     }
+
+//    public static void main(String[] args) {
+////        String path = "./logs";
+//////        File file = new File(path);
+//////        File[] files = file.listFiles();
+//////        System.out.println(file);
+//////        System.out.println(files);
+//////        System.out.println(files.length);
+//////        for (File f : files) {
+//////            if (f.isDirectory()) {
+//////                String dir = f.getName();
+//////                System.err.println(dir);
+//////                System.err.println(f.getAbsolutePath());
+//////            } else {
+//////                System.out.println(f.getName());
+//////            }
+//////        }
+////
+////        List<LogFile> list = new ArrayList<>();
+////
+////        dfs(path,0,list,"root");
+////
+////        for(LogFile logFile: list){
+////            if(logFile.getIsDir() == 1){
+////                System.out.println(logFile);
+////            }
+////            else{
+////                System.err.println(logFile);
+////            }
+////        }
+//
+//    }
+
+    @GetMapping("/log")
+    public Object log(){
+        String path = "./logs";
+        List<LogFile> list = new ArrayList<>();
+
+//        dfs(path,0,list,"root");
+
+        return list;
+
+    }
+
+    @GetMapping("/log2")
+    public Object log2(){
+
+        return logFileService.getLogFileList("root");
+
+    }
+
+    @PostMapping("/log3")
+    public Object log3(@RequestBody List<LogFile> list ,HttpServletResponse response){
+//        System.err.println(list);
+//
+////        ZipUtil.pack(new File(list.get(0).getPath()),new File("./logs/demo.zip"));
+////        ZipUtil.packEntry(new File(list.get(0).getPath()),new File("./logs/demo.zip"));
+//
+////        LogFile logFile = list.get(0);
+////        if(logFile.getIsDir() == 1){
+////            ZipUtil.pack(new File(list.get(0).getPath()),new File("./logs/demo.zip"));
+////        }
+////        else{
+////            ZipUtil.packEntry(new File(list.get(0).getPath()),new File("./logs/demo.zip"));
+////        }
+////
+////        ZipEntrySource[] addedEntries = new ZipEntrySource[list.size() - 1];
+////
+////        for(int i = 1;i < list.size();i++){
+////            LogFile logFile1 = list.get(i);
+////
+////            addedEntries[i - 1] = new FileSource(list.get(i).getPath(), new File(list.get(i).getPath()));
+////        }
+//////        {
+//////                new FileSource(list.get(0).getPath(), new File(list.get(0).getPath()))
+//////        };
+////        ZipUtil.addOrReplaceEntries(new File("./logs/demo.zip"), addedEntries);
+//
+//        for(LogFile logFile :list){
+////            copyFile(new File(logFile.getPath()),new File("./logs/temp"));
+////            copy(new File(logFile.getPath()),new File("./logs/temp"));
+//            if(logFile.getIsDir() == 1){
+//                fileUtil.copyFolder(logFile.getPath(),"./logs/temp/" + logFile.getFileName());
+//            }
+//            else{
+//                fileUtil.copyFile(logFile.getPath(),"./logs/temp/" + logFile.getFileName(),"./logs/temp/");
+//            }
+//        }
+//
+////        fileUtil.delFolder("./logs/temp");
+//        ZipUtil.pack(new File("./logs/temp"),new File("./logs/日志.zip"));
+//        String filename = "日志.zip";
+//        String filepath = "./logs/" + filename;
+//        fileUtil.downFile(response,filename,filepath);
+//
+//        System.err.println("dsds");
+        return list;
+    }
+
+    @Autowired
+    FileUtil fileUtil;
+
+    @Autowired
+    private LogFileDao logFileDao;
+
+    @Autowired
+    private LogFileService logFileService;
+
+//    private void dfs(String path,int level,List<LogFile> list,String preFileName){
+//        File file = new File(path);
+//        File[] files = file.listFiles();
+//
+//
+//        for(File f: files){
+//            LogFile logFile = new LogFile();
+//            logFile.setFileName(f.getName());
+//            logFile.setPath(f.getAbsolutePath());
+//            logFile.setLevel(level);
+//            logFile.setPreLevelName(preFileName);
+//
+//            if(f.isDirectory()){
+//                logFile.setIsDir(1);
+//                List<LogFile> tp = new ArrayList<>();
+//                logFile.setLogFileList(tp);
+//                list.add(logFile);
+//                logFileDao.insert(logFile);
+//                dfs(f.getAbsolutePath(),level + 1,tp,f.getName());
+//            }
+//            else{
+//                logFile.setIsDir(0);
+//                list.add(logFile);
+//                logFileDao.insert(logFile);
+//            }
+//        }
+//    }
+
+//    public static void dfs(String path,int level,List<LogFile> list,String preFileName){
+//        File file = new File(path);
+//        File[] files = file.listFiles();
+//
+//
+//        for(File f: files){
+//            LogFile logFile = new LogFile();
+//            logFile.setFileName(f.getName());
+//            logFile.setPath(f.getAbsolutePath());
+//            logFile.setLevel(level);
+//            logFile.setPreLevelName(preFileName);
+//
+//            if(f.isDirectory()){
+//                logFile.setIsDir(1);
+//                List<LogFile> tp = new ArrayList<>();
+//                logFile.setLogFileList(tp);
+//                list.add(logFile);
+//                dfs(f.getAbsolutePath(),level + 1,tp,f.getName());
+//            }
+//            else{
+//                logFile.setIsDir(0);
+//                list.add(logFile);
+//            }
+//        }
+//    }
+
 
 
 }

@@ -29,7 +29,7 @@ public class DateUtil {
      */
     public static final String LDATETIME_FORMAT = "yyyyMMddHHmmss";
     /**
-     * yyyyMMddHHmmss
+     * yyyyMMddHHmmssSSS
      */
     public static final String LLDATETIME_FORMAT = "yyyyMMddHHmmssSSS";
     /**
@@ -254,6 +254,11 @@ public class DateUtil {
         return format(lDateTimeThreadLocal.get(), date);
     }
 
+
+    /**
+     * @param date
+     * @return yyyyMMddHHmmssSSS
+     */
     public  String formatLLDateTime(Date date) {
         return format(llDateTimeThreadLocal.get(), date);
     }

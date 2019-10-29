@@ -34,6 +34,12 @@ public class ComplaintAndSuggestionController {
         return complaintAndSuggestionSheetService.queryOwnerComplaintAndSuggestionSheetByUserId(userId, pageNum, size);
     }
 
+    @DeleteMapping(value = "/del")
+    @ApiOperation("删除投诉建议单")
+    public Result delComplaintAndSuggestionSheet(@RequestBody ComplaintAndSuggestionSheet complaintAndSuggestionSheet){
+        return complaintAndSuggestionSheetService.delComplaintAndSuggestionSheet(complaintAndSuggestionSheet);
+    }
+
     @PostMapping(value = "/update")
     public Result updateComplaintAndSuggestionSheet(){
         return new Result();

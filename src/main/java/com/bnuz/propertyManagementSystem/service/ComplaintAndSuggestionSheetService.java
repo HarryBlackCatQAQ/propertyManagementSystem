@@ -8,6 +8,8 @@ public interface ComplaintAndSuggestionSheetService {
 
     public Result queryOwnerComplaintAndSuggestionSheetByUserId(int userId,int pageNum,int size);
 
+    public Result delComplaintAndSuggestionSheet(ComplaintAndSuggestionSheet complaintAndSuggestionSheet);
+
     public Result updateComplaintAndSuggestionSheet();
 
     public Result queryComplaintAndSuggestionSheetByRoot();

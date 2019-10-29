@@ -3,7 +3,9 @@ package com.bnuz.propertyManagementSystem.util;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.net.URLEncoder;
 
 /**
  * @Author: Harry
@@ -90,6 +92,8 @@ public class FileUtil {
                 os.write(buffer, 0, i);
                 i = bis.read(buffer);
             }
+            os.flush();
+            os.close();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -133,7 +137,7 @@ public class FileUtil {
      * @param path
      * @return 返回是否删除成功
      */
-    public boolean delAllFile(String path) {
+    private boolean delAllFile(String path) {
         boolean flag = false;
         File file = new File(path);
         if (!file.exists()) {
@@ -165,5 +169,159 @@ public class FileUtil {
             }
         }
         return flag;
+    }
+
+    /**
+     * 删除文件
+     * @param path
+     * @return
+     */
+    public boolean delFile(String path){
+        boolean flag = false;
+        File file = new File(path);
+        if (!file.exists()) {
+            return flag;
+        }
+        file.delete();
+        return true;
+    }
+
+    /**
+     * 复制文件
+     * @param oldPath
+     * @param newPath
+     * @param mkdirPath
+     */
+    public void copyFile(String oldPath, String newPath,String mkdirPath) {
+        InputStream inStream = null;
+        FileOutputStream fs = null;
+        try {
+            (new File(mkdirPath)).mkdirs();
+            int bytesum = 0;
+            int byteread = 0;
+
+            File oldfile = new File(oldPath);
+            if (oldfile.exists()) { //文件存在时
+                inStream = new FileInputStream(oldPath); //读入原文件
+                fs = new FileOutputStream(newPath);
+                byte[] buffer = new byte[1444];
+                int length;
+                while ( (byteread = inStream.read(buffer)) != -1) {
+                    bytesum += byteread; //字节数 文件大小
+//                    System.out.println(bytesum);
+                    fs.write(buffer, 0, byteread);
+                }
+                inStream.close();
+            }
+        }
+        catch (Exception e) {
+            System.out.println("复制单个文件操作出错");
+            e.printStackTrace();
+
+        }finally {
+            try{
+                if(fs != null){
+                    fs.close();
+                }
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                if(inStream != null){
+                    inStream.close();
+                }
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    /**
+     * 复制整个文件夹内容
+     * @param oldPath String 原文件路径 如：c:/fqf
+     * @param newPath String 复制后路径 如：f:/fqf/ff
+     * @return boolean
+     */
+    public void copyFolder(String oldPath, String newPath) {
+
+        try {
+            (new File(newPath)).mkdirs(); //如果文件夹不存在 则建立新文件夹
+            File a=new File(oldPath);
+            String[] file=a.list();
+            File temp=null;
+            for (int i = 0; i < file.length; i++) {
+                if(oldPath.endsWith(File.separator)){
+                    temp=new File(oldPath+file[i]);
+                }
+                else{
+                    temp=new File(oldPath+File.separator+file[i]);
+                }
+
+                if(temp.isFile()){
+                    FileInputStream input = new FileInputStream(temp);
+                    FileOutputStream output = new FileOutputStream(newPath + "/" +
+                            (temp.getName()).toString());
+                    byte[] b = new byte[1024 * 5];
+                    int len;
+                    while ( (len = input.read(b)) != -1) {
+                        output.write(b, 0, len);
+                    }
+                    output.flush();
+                    output.close();
+                    input.close();
+                }
+                if(temp.isDirectory()){//如果是子文件夹
+                    copyFolder(oldPath+"/"+file[i],newPath+"/"+file[i]);
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println("复制整个文件夹内容操作出错");
+            e.printStackTrace();
+
+        }
+
+    }
+
+    /**
+     * 用于下载文件
+     * @param response
+     * @param filename
+     * @param filepath
+     */
+    public void downFile(HttpServletResponse response,String filename,String filepath){
+        boolean flag = false;
+        if (filename != null) {
+            File file = new File(filepath);
+            // 如果文件存在，则进行下载
+            if (file.exists()) {
+                // 配置文件下载
+                response.setHeader("content-type", "application/octet-stream");
+                response.setContentType("application/octet-stream");
+                // 下载文件能正常显示中文
+                try {
+                    response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(filename, "UTF-8"));
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                // 实现文件下载
+                byte[] buffer = new byte[1024];
+                FileInputStream fis = null;
+                BufferedInputStream bis = null;
+
+                try {
+                    fis = new FileInputStream(file);
+                    OutputStream os = response.getOutputStream();
+                    writeFile(fis,os);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }
+
     }
 }

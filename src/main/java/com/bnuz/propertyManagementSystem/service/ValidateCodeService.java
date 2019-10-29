@@ -15,4 +15,9 @@ public interface ValidateCodeService {
      * @return
      */
     public ImageCode createImageCode(int seconds);
+
+
+    public static final String VALIDATE_CODE_PER = "ValidateCode";
+
+    public void saveValidateCodeInRedis(String code,String ip);
 }

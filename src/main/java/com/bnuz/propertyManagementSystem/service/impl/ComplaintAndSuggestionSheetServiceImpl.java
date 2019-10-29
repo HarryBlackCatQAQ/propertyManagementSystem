@@ -50,7 +50,8 @@ public class ComplaintAndSuggestionSheetServiceImpl implements ComplaintAndSugge
 
         ComplaintAndSuggestionSheetTimeline timeline = new ComplaintAndSuggestionSheetTimeline();
 
-        timeline.setMessage(complaintAndSuggestionSheet.getMessage());
+//        timeline.setMessage(complaintAndSuggestionSheet.getMessage());
+        timeline.setMessage("用户第一次提交！");
         timeline.setProcessingTime(now);
         timeline.setProcessingUserNickName(complaintAndSuggestionSheet.getUserNickName());
         timeline.setSheetId(complaintAndSuggestionSheet.getId());
@@ -73,6 +74,12 @@ public class ComplaintAndSuggestionSheetServiceImpl implements ComplaintAndSugge
 
         PageInfo<ComplaintAndSuggestionSheet> page = new PageInfo<ComplaintAndSuggestionSheet>(list);
         return new Result(true,ResultStatusCode.OK,"查询成功!",page);
+    }
+
+    @Override
+    public Result delComplaintAndSuggestionSheet(ComplaintAndSuggestionSheet complaintAndSuggestionSheet) {
+        complaintAndSuggestionSheetDao.deleteByPrimaryKey(complaintAndSuggestionSheet.getId());
+        return new Result(true,ResultStatusCode.OK,"删除成功!");
     }
 
     @Override

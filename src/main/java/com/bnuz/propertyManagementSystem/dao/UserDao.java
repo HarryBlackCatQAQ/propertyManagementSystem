@@ -16,7 +16,6 @@ public interface UserDao extends MyBatisBaseDao<User, Integer, UserExample> {
     @Select("SELECT * FROM user where userName = #{username} and password = #{password}")
     public User selectByUser(User user);
 
-
     @Select("SELECT * FROM user where userName = #{username}")
     public User selectByUserName(String username);
 

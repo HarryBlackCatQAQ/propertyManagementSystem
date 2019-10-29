@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.bnuz.propertyManagementSystem.model.Result;
 import com.bnuz.propertyManagementSystem.model.ResultStatusCode;
 import com.bnuz.propertyManagementSystem.service.redis.JWTRedisService;
+import com.bnuz.propertyManagementSystem.service.redis.LoginFailureTimesService;
 import com.bnuz.propertyManagementSystem.util.JwtTokenUtils;
 import com.bnuz.propertyManagementSystem.util.SpringUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -60,6 +62,12 @@ public class JWTLogoutFilter extends LogoutFilter {
             boolean flag = jwtRedisService.delToken(username);
 
             log.info("" + flag);
+
+            LoginFailureTimesService loginFailureTimesService = SpringUtil.getBean(LoginFailureTimesService.class);
+            HttpSession session = request.getSession();
+
+            loginFailureTimesService.delLoginFailTimes(session.getId());
+//            loginFailureTimesService.delLoginFailTimes(request.getRemoteAddr());
 
             Result result = new Result(true, ResultStatusCode.OK,"logout success");
             String json = JSON.toJSONString(result);

@@ -1,10 +1,12 @@
 package com.bnuz.propertyManagementSystem.service.impl;
 
 import com.bnuz.propertyManagementSystem.dao.UserDao;
+import com.bnuz.propertyManagementSystem.emailSender.MailService;
 import com.bnuz.propertyManagementSystem.model.Result;
 import com.bnuz.propertyManagementSystem.model.ResultStatusCode;
 import com.bnuz.propertyManagementSystem.model.User;
 import com.bnuz.propertyManagementSystem.service.UserService;
+import com.bnuz.propertyManagementSystem.service.redis.JWTRedisService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Results;
@@ -25,6 +27,12 @@ public class UserSerivceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private JWTRedisService jwtRedisService;
+
+    @Autowired
+    private MailService mailService;
 
     @Override
     public Result getAllUser(int pageNum,int size) {
@@ -109,4 +117,49 @@ public class UserSerivceImpl implements UserService {
         }
     }
 
+    public Result selectByPhone(String phone){
+        List<User> list = userDao.selectByPhone(phone);
+        return new Result(true, ResultStatusCode.OK,"查询成功",list);
+    }
+
+    public Result getById(Integer id) {
+        User user = userDao.getById(id);
+        return new Result(true, ResultStatusCode.OK, "查询成功", user);
+    }
+
+    @Override
+    public Result sendEmailConfirm(Integer userId, String emailAddress) {
+        User user = userDao.getById(userId);
+        String token = (String)jwtRedisService.getToken(user.getUsername());
+        StringBuilder link = new StringBuilder();
+        link.append("http://localhost:8087/#/user/information?userId=").append(userId)
+            .append("&emailAddress=").append(emailAddress)
+            .append("&token=").append(token);
+        StringBuilder html = new StringBuilder();
+
+        html.append("<p>尊敬的用户:</p>")
+            .append("<p>您正在尝试绑定邮箱，请点击下方的链接来验证您的邮箱，该链接20分钟内有效。<br/>")
+            .append("<a href=").append(link).append(">").append(link).append("</a></p>")
+            .append("<p>若有任何疑问请及时与我们取得联系:0756-12345678<br/>")
+            .append("祝您生活愉快</p>");
+        return mailService.sendHtmlMail(emailAddress, "邮箱确认", html.toString());
+    }
+
+    @Override
+    public Result emailConfirm(Integer userId, String emailAddress, String token) {
+        synchronized (UserSerivceImpl.class){
+            User user = userDao.getById(userId);
+            String flagToken = (String)jwtRedisService.getToken(user.getUsername());
+            if (token.equals(flagToken)) {
+                user.setEmailAddress(emailAddress);
+                int result = userDao.updateUserEmailAddress(user);
+                if(result == 1) {
+                    return new Result(true, ResultStatusCode.OK, "邮箱绑定成功");
+                } else {
+                    return new Result(false, ResultStatusCode.OK, "邮箱绑定失败");
+                }
+            }
+            return new Result(false, ResultStatusCode.OK, "链接已过期");
+        }
+    }
 }

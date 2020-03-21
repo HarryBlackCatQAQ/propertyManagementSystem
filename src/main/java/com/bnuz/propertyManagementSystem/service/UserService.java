@@ -34,4 +34,35 @@ public interface UserService {
      * @return
      */
     public Result selectByType(String ttype,String content,int pageNum,int size);
+
+    /**
+     * 根据手机号查询User
+     * @param phone
+     * @return
+     */
+    public Result selectByPhone(String phone);
+
+    /**
+     * 根据id查询User
+     * @param id
+     * @return
+     */
+    public Result getById(Integer id);
+
+    /**
+     * 发送邮箱验证
+     * @param userId
+     * @param emailAddress
+     * @return
+     */
+    public Result sendEmailConfirm(Integer userId, String emailAddress);
+
+    /**
+     * 邮箱确认
+     * @param userId
+     * @param emailAddress
+     * @param token
+     * @return
+     */
+    public Result emailConfirm(Integer userId, String emailAddress, String token);
 }

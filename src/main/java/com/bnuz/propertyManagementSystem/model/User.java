@@ -40,6 +40,18 @@ public class User implements Serializable {
     private String password;
 
     /**
+     * 手机号
+     */
+    @ApiModelProperty(value = "手机号",example = "123456789")
+    private String phone;
+
+    /**
+     * 邮箱地址
+     */
+    @ApiModelProperty(value = "邮箱地址",example = "test@mail.bnuz.edu.cn")
+    private String emailAddress;
+
+    /**
      * 用户角色
      */
     @ApiModelProperty(value = "用户角色",example = "0")
@@ -79,6 +91,22 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
     public Integer getRole() {
         return role;
     }
@@ -103,6 +131,8 @@ public class User implements Serializable {
             && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
             && (this.getNickname() == null ? other.getNickname() == null : this.getNickname().equals(other.getNickname()))
             && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
+            && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
+            && (this.getEmailAddress() == null ? other.getEmailAddress() == null : this.getEmailAddress().equals(other.getEmailAddress()))
             && (this.getRole() == null ? other.getRole() == null : this.getRole().equals(other.getRole()));
     }
 
@@ -114,6 +144,8 @@ public class User implements Serializable {
         result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
         result = prime * result + ((getNickname() == null) ? 0 : getNickname().hashCode());
         result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
+        result = prime * result + ((getPhone() == null) ? 0 : getPhone().hashCode());
+        result = prime * result + ((getEmailAddress() == null) ? 0 : getEmailAddress().hashCode());
         result = prime * result + ((getRole() == null) ? 0 : getRole().hashCode());
         return result;
     }
@@ -128,6 +160,8 @@ public class User implements Serializable {
         sb.append(", username=").append(username);
         sb.append(", nickname=").append(nickname);
         sb.append(", password=").append(password);
+        sb.append(", phone=").append(phone);
+        sb.append(", emailAddress=").append(emailAddress);
         sb.append(", role=").append(role);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

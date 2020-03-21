@@ -2,6 +2,7 @@ package com.bnuz.propertyManagementSystem.dao;
 
 import com.bnuz.propertyManagementSystem.dto.HouseDto;
 import com.bnuz.propertyManagementSystem.model.House;
+import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,5 +25,9 @@ public interface HouseDao extends JpaRepository<House, Integer> {
   House getById(Integer id);
 
   House getByBuildingIdAndNumber(Integer buildingId, Integer number);
+
+  Page<House> findByUserIdOrderByNumber(Integer userId, Pageable pageable);
+
+  List<House> findAllByUserIdNotNull();
 
 }

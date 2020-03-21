@@ -8,6 +8,7 @@ import com.niezhiliang.simple.pay.utils.PayUtils;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,13 +33,18 @@ public class AlipayController {
     @Autowired
     private PropertyManagementFeeService propertyManagementFeeService;
 
-    @GetMapping(value = "/payPropertyManagementFee")
-    public Object pay(String outTradeNo){
-        return propertyManagementFeeService.aliPay(outTradeNo);
+    @GetMapping(value = "/payPropertyManagementFee/QRCode")
+    public Object aliPayQRCode(String outTradeNo){
+        return propertyManagementFeeService.aliPayQRCode(outTradeNo);
+    }
+
+    @GetMapping(value = "/payPropertyManagementFee/pcPay")
+    public String aliPayPcpay(String outTradeNo){
+        return propertyManagementFeeService.aliPayPcpay(outTradeNo);
     }
 
 
-    @RequestMapping(value = "/callback")
+    @PostMapping(value = "/callback")
     public String payCallBack(HttpServletRequest request){
         return propertyManagementFeeService.aliPayCallBack(PayUtils.alipayPayCallBack(request));
     }

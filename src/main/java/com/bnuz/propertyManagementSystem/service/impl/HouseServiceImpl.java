@@ -5,6 +5,7 @@ import com.bnuz.propertyManagementSystem.model.House;
 import com.bnuz.propertyManagementSystem.model.Result;
 import com.bnuz.propertyManagementSystem.model.ResultStatusCode;
 import com.bnuz.propertyManagementSystem.service.HouseService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -82,4 +83,27 @@ public class HouseServiceImpl implements HouseService {
     return new Result(true, ResultStatusCode.OK, "房屋门牌号可用");
   }
 
+  @Override
+  @Transactional(readOnly = true)
+  public Result getAllHouses() {
+    List<House> houses = houseDao.findAll();
+    return new Result(true, ResultStatusCode.OK, "查询成功", houses);
+  }
+
+  @Override
+  public Result getUserAllHouses(Integer pageNum, Integer pageSize, Integer userId) {
+    Pageable pageable = PageRequest.of(pageNum, pageSize);
+    Page page = houseDao.findByUserIdOrderByNumber(userId, pageable);
+    return new Result(true, ResultStatusCode.OK, "查询成功", page);
+  }
+
+  @Override
+  public Result updateOwner(Integer houseId, Integer userId) {
+    synchronized (HouseServiceImpl.class) {
+      House house = houseDao.getById(houseId);
+      house.setUserId(userId);
+      houseDao.saveAndFlush(house);
+      return new Result(true, ResultStatusCode.OK, "更新成功", true);
+    }
+  }
 }

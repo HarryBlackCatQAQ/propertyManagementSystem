@@ -30,11 +30,7 @@ public class PropertyManagementSystemApplicationTests {
     HouseFeeRecordService houseFeeRecordService;
     @Test
     public void contextLoads() {
-        Result result = houseFeeRecordService.getOwnerUnPayFeesList(6,0,10);
-        Page page = (Page)result.getData();
-        System.err.println(page.getTotalElements());
-        System.err.println(page.getTotalPages());
-        System.err.println(page.getSize());
+
     }
 
 }

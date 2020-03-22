@@ -8,6 +8,8 @@ import com.bnuz.propertyManagementSystem.service.LogFileService;
 import com.bnuz.propertyManagementSystem.service.scheduling.LogFileScheduling;
 import com.bnuz.propertyManagementSystem.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.zeroturnaround.zip.ZipUtil;
 
@@ -32,6 +34,7 @@ public class LogFileServiceImpl implements LogFileService {
     @Autowired
     private LogFileScheduling logFileScheduling;
 
+    @Cacheable(value = "LogFileList",key = "#preLevelName")
     @Override
     public Result getLogFileList(String preLevelName) {
 
@@ -70,6 +73,7 @@ public class LogFileServiceImpl implements LogFileService {
         return new Result();
     }
 
+    @CacheEvict(value = "LogFileList",allEntries = true)
     @Override
     public Result updateLogFile() {
         logFileScheduling.schedulingInsertLogFile();;

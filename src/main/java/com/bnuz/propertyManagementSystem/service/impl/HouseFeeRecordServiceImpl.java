@@ -26,9 +26,23 @@ public class HouseFeeRecordServiceImpl implements HouseFeeRecordService {
 
     @Override
     public Result getOwnerUnPayFeesList(int userId,int pageNum, int pageSize) {
+        return getPayFeesListByPayState(userId,pageNum,pageSize,0);
+    }
+
+    @Override
+    public Result getPayFeesListByPayState(int userId, int pageNum, int pageSize, int payState) {
         Pageable pageable = PageRequest.of(pageNum, pageSize);
-        Page page = houseFeeRecordDao.findAllUnPayFeesListByUserId(userId,pageable);
+        Page page = houseFeeRecordDao.findAllPayFeesListByUserIdAndPayState(userId,payState,pageable);
 
         return new Result(true, ResultStatusCode.OK, "查询成功", page);
     }
+
+    @Override
+    public Result getAllPayFeesList(int userId, int pageNum, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNum, pageSize);
+        Page page = houseFeeRecordDao.findAllPayFeesListByUserId(userId,pageable);
+
+        return new Result(true, ResultStatusCode.OK, "查询成功", page);
+    }
+
 }

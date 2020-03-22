@@ -87,6 +87,7 @@ public class FileUtil {
         try {
             fis = in;
             bis = new BufferedInputStream(fis);
+
             int i = bis.read(buffer);
             while (i != -1) {
                 os.write(buffer, 0, i);

@@ -13,7 +13,10 @@ import com.bnuz.propertyManagementSystem.util.FileUtil;
 import io.swagger.annotations.Api;
 import io.swagger.models.auth.In;
 //import org.apache.catalina.webresources.FileResource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,6 +45,7 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @RequestMapping(value = "/test")
 @Api(tags = "个人测试接口(无作用)")
+@Slf4j
 public class TestController {
 
 //    @PreAuthorize("hasAnyRole('ROLE_0','ROLE_1','ROLE_2')")
@@ -347,6 +351,35 @@ public class TestController {
 //            }
 //        }
 //    }
+
+    @Cacheable(value = "user", key = "#id")
+    @GetMapping("/cache")
+    public User get(Long id) {
+        // TODO 我们就假设它是从数据库读取出来的
+        log.info("进入 get 方法");
+        User user = new User();
+        user.setPassword("1");
+        user.setNickname("2");
+        user.setRole(3);
+        user.setUsername("4");
+        user.setId(100);
+        return user;
+    }
+
+
+    @CacheEvict(value = "user",allEntries = true)
+    @GetMapping("/cacheDel")
+    public User del(Long id) {
+        // TODO 我们就假设它是从数据库读取出来的
+        log.info("进入 get 方法");
+        User user = new User();
+        user.setPassword("1");
+        user.setNickname("2");
+        user.setRole(3);
+        user.setUsername("4");
+        user.setId(100);
+        return user;
+    }
 
 
 

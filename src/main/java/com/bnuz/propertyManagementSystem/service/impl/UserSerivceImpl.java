@@ -7,8 +7,9 @@ import com.bnuz.propertyManagementSystem.model.User;
 import com.bnuz.propertyManagementSystem.service.UserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.apache.ibatis.annotations.Results;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,7 @@ public class UserSerivceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
+    @Cacheable(value = "User",key = "#pageNum + '-' + #size")
     @Override
     public Result getAllUser(int pageNum,int size) {
 
@@ -33,13 +35,13 @@ public class UserSerivceImpl implements UserService {
         PageHelper.startPage(pageNum,size);
         List<User> list = userDao.selectAllUser();
 
-
         //用PageInfo对结果进行包装 可以获取到User的总共条数，根据pageNum和size分的总页数等等基本信息，具体可以自行打印出来看
         PageInfo<User> page = new PageInfo<User>(list);
 
         return new Result(true, ResultStatusCode.OK,"查询成功",page);
     }
 
+    @CacheEvict(value = "User",allEntries = true)
     @Override
     public Result delUser(int id) {
 
@@ -56,6 +58,7 @@ public class UserSerivceImpl implements UserService {
 
     }
 
+    @CacheEvict(value = "User",allEntries = true)
     @Override
     public Result updateUser(User user) {
         synchronized (UserSerivceImpl.class){
@@ -72,6 +75,7 @@ public class UserSerivceImpl implements UserService {
         }
     }
 
+    @Cacheable(value = "User",key = "#ttype + '-' + #content + '-' + #pageNum + '-' + #size")
     @Override
     public Result selectByType(String ttype, String content,int pageNum,int size) {
 

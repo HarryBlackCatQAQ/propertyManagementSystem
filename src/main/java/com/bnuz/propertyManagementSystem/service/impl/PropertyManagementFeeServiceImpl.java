@@ -3,6 +3,7 @@ package com.bnuz.propertyManagementSystem.service.impl;
 import com.bnuz.propertyManagementSystem.dao.HouseFeeRecordDao;
 import com.bnuz.propertyManagementSystem.model.*;
 import com.bnuz.propertyManagementSystem.service.PropertyManagementFeeService;
+import com.niezhiliang.simple.pay.dto.AlipayPcPayDTO;
 import com.niezhiliang.simple.pay.dto.AlipayQrcodeDTO;
 import com.niezhiliang.simple.pay.utils.PayUtils;
 import com.niezhiliang.simple.pay.vos.AlipayCallBackVO;
@@ -11,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
+
 
 /**
  * @Author: Harry
@@ -42,25 +44,43 @@ public class PropertyManagementFeeServiceImpl implements PropertyManagementFeeSe
         alipayQrcodeDTO.setTotalAmount(houseFeeRecord.getFee());
         alipayQrcodeDTO.setSubject(name);
 
-
-        AlipayQrcodeVO alipayQrcodeVO = PayUtils.alipayQrcode(alipayQrcodeDTO);
-
-//        System.err.println(alipayQrcodeVO);
-
-        if(alipayQrcodeVO == null){
-            return new Result(false,ResultStatusCode.ERROR,ResultStatusCode.ERROR_MES_SYS);
-        }
+        AlipayQrcodeVO alipayQrcodeVO = null;
 
 
-        if(alipayQrcodeVO.getCode().equals("10000")){
-            String str =
-                    "forward:/QRcode/create?qrCodeUrl=" + alipayQrcodeVO.getQr_code();
 
-            return new ModelAndView(str);
-        }
-        else{
-            return new Result(false,ResultStatusCode.ERROR,ResultStatusCode.ERROR_MES_SYS);
-        }
+        AlipayPcPayDTO pcPayDTO = new AlipayPcPayDTO();
+        pcPayDTO.setOutTradeNo(houseFeeRecord.getOutTradeNo());
+        pcPayDTO.setTotalAmount(houseFeeRecord.getFee());
+        pcPayDTO.setSubject(name);
+        String form = PayUtils.alpayPcPay(pcPayDTO);
+
+        return form;
+
+
+
+//        try{
+//            alipayQrcodeVO = PayUtils.alipayQrcode(alipayQrcodeDTO);
+//        }
+//        catch (Exception e){
+//            log.error("alipay连接超时");
+//        }
+//
+////        System.err.println(alipayQrcodeVO);
+//
+//        if(alipayQrcodeVO == null){
+//            return new Result(false,ResultStatusCode.ERROR,ResultStatusCode.ERROR_MES_SYS);
+//        }
+//
+//
+//        if(alipayQrcodeVO.getCode().equals("10000")){
+//            String str =
+//                    "forward:/QRcode/create?qrCodeUrl=" + alipayQrcodeVO.getQr_code();
+//
+//            return new ModelAndView(str);
+//        }
+//        else{
+//            return new Result(false,ResultStatusCode.ERROR,ResultStatusCode.ERROR_MES_SYS);
+//        }
     }
 
     @Override

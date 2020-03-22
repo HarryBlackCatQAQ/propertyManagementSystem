@@ -1,11 +1,13 @@
 package com.bnuz.propertyManagementSystem.model;
 
+import java.io.Serializable;
+
 /**
  * @Author: Harry
  * @Date: 2019-09-20 15:24
  * @Version 1.0
  */
-public class Result {
+public class Result implements Serializable {
     /**
      *  是否成功
      */

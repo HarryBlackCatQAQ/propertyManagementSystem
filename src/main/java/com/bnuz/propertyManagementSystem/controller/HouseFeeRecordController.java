@@ -27,4 +27,16 @@ public class HouseFeeRecordController {
     public Result getOwnerUnPayFeesList(int userId,int pageNum, int pageSize){
         return houseFeeRecordService.getOwnerUnPayFeesList(userId, pageNum, pageSize);
     }
+
+    @GetMapping("/getPayFeesListByPayState")
+    @ApiOperation("根据支付状态获取物业费列表")
+    public Result getPayFeesListByPayState(int userId,int pageNum,int pageSize,int payState){
+        return  houseFeeRecordService.getPayFeesListByPayState(userId, pageNum, pageSize, payState);
+    }
+
+    @GetMapping("/getAllPayFeesList")
+    @ApiOperation("获取所有物业费列表")
+    public Result getAllPayFeesList(int userId,int pageNum,int pageSize){
+        return houseFeeRecordService.getAllPayFeesList(userId, pageNum, pageSize);
+    }
 }

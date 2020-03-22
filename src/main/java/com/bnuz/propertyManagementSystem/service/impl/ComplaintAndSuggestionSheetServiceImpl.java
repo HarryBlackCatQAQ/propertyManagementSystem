@@ -12,6 +12,8 @@ import com.bnuz.propertyManagementSystem.util.DateUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,7 +39,7 @@ public class ComplaintAndSuggestionSheetServiceImpl implements ComplaintAndSugge
     @Autowired
     private ComplaintAndSuggestionSheetTimelineDao complaintAndSuggestionSheetTimelineDao;
 
-
+    @CacheEvict(value = "ComplaintAndSuggestionSheet",allEntries = true)
     @Override
     public Result createComplaintAndSuggestionSheet(ComplaintAndSuggestionSheet complaintAndSuggestionSheet) {
         Date now = dateUtil.getNow();
@@ -63,6 +65,7 @@ public class ComplaintAndSuggestionSheetServiceImpl implements ComplaintAndSugge
         return new Result(true, ResultStatusCode.OK,"申请成功!",hashMap);
     }
 
+    @Cacheable(value = "ComplaintAndSuggestionSheet", key = "#userId + '-' + #pageNum + '-' + #size")
     @Override
     public Result queryOwnerComplaintAndSuggestionSheetByUserId(int userId,int pageNum,int size) {
 //        System.err.println(userId + " " + pageNum + " " + size);
@@ -76,6 +79,7 @@ public class ComplaintAndSuggestionSheetServiceImpl implements ComplaintAndSugge
         return new Result(true,ResultStatusCode.OK,"查询成功!",page);
     }
 
+    @CacheEvict(value = "ComplaintAndSuggestionSheet",allEntries = true)
     @Override
     public Result delComplaintAndSuggestionSheet(ComplaintAndSuggestionSheet complaintAndSuggestionSheet) {
         complaintAndSuggestionSheetDao.deleteByPrimaryKey(complaintAndSuggestionSheet.getId());

@@ -21,7 +21,6 @@ public class ComplaintAndSuggestionController {
     @Autowired
     private ComplaintAndSuggestionSheetService complaintAndSuggestionSheetService;
 
-
     @PostMapping(value = "/create")
     @ApiOperation("申请投诉建议单")
     public Result createComplaintAndSuggestionSheet(@RequestBody ComplaintAndSuggestionSheet complaintAndSuggestionSheet){

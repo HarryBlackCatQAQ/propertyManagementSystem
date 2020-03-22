@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.Date;
 import javax.persistence.*;
 
 import lombok.Data;
@@ -55,11 +56,32 @@ public class  HouseFeeRecord {
   @ApiModelProperty(value = "支付方式")
   private String payType;
 
+  @ApiModelProperty(value = "支付时间")
+  private Date payTime;
+
+  @Transient
+  @ApiModelProperty(value = "费用名称")
+  private String paymentName;
+
   @ManyToOne
   @JoinColumn(name = "houseId", insertable = false ,updatable = false)
   @JsonIgnore
   @JsonBackReference
   @ApiModelProperty(value = "所属房屋", hidden = true)
   private House house;
+
+  public String getPaymentName() {
+    String name = "";
+    if(this.getHouse() != null){
+      Property property = this.getHouse().getBuilding().getProperty();
+      Building building = this.getHouse().getBuilding();
+      House house = this.getHouse();
+      name += property.getLocation() + property.getName();
+      name += building.getName();
+      name += house.getNumber();
+      name += "物业费";
+    }
+    return name;
+  }
 
 }

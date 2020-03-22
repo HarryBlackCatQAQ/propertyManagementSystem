@@ -60,6 +60,12 @@ public class PropertyController {
     return propertyService.findAll(pageNum - 1, pageSize);
   }
 
+  @GetMapping(value = "getAllProperty")
+  @ApiOperation("获取所有楼盘接口")
+  public Result getAllProperty() {
+    return propertyService.getAllProperty();
+  }
+
   @GetMapping(value = "getFirst")
   @ApiOperation("获取第一个楼盘接口")
   public Result getFirst() {
@@ -90,7 +96,7 @@ public class PropertyController {
     @ApiImplicitParam(name = "propertyName", value = "楼盘名字", defaultValue = "京师家园")
   })
   public Result checkPropertyName(@RequestParam String propertyName){
-    return propertyService.getByName(propertyName);
+    return propertyService.checkPropertyName(propertyName);
   }
 
 }

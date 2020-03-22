@@ -57,4 +57,10 @@ public class UserManagementController {
         return userService.selectByType(ttype,content,pageNum,size);
     }
 
+    @GetMapping("/selectUserByPhone")
+    @ApiOperation("根据手机号查询用户")
+    public Result selectByPhone(String phone){
+        return userService.selectByPhone(phone);
+    }
+
 }

@@ -1,12 +1,17 @@
 package com.bnuz.propertyManagementSystem.controller;
 
 import com.bnuz.propertyManagementSystem.model.House;
+import com.bnuz.propertyManagementSystem.model.HouseFeeRecord;
 import com.bnuz.propertyManagementSystem.model.Result;
+import com.bnuz.propertyManagementSystem.service.HouseFeeRecordService;
 import com.bnuz.propertyManagementSystem.service.HouseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
+import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +35,9 @@ public class HouseController {
 
   @Autowired
   private HouseService houseService;
+
+  @Autowired
+  private HouseFeeRecordService houseFeeRecordService;
 
   @PostMapping(value = "insert")
   @ApiOperation("新增房屋接口")
@@ -66,7 +74,7 @@ public class HouseController {
     @ApiImplicitParam(name = "pageSize", value = "每页条数", defaultValue = "10"),
     @ApiImplicitParam(name = "buildingId", value = "楼栋Id", defaultValue = "2")
   })
-  public Result findAllByBuildingUid(@RequestParam Integer pageNum, Integer pageSize, Integer buildingId) {
+  public Result findAllByBuildingId(@RequestParam Integer pageNum, Integer pageSize, Integer buildingId) {
     return houseService.findAllByBuildingId(pageNum - 1, pageSize, buildingId);
   }
 
@@ -79,14 +87,44 @@ public class HouseController {
     return houseService.getById(id);
   }
 
-  @GetMapping(value = "getByBuildingIdAndNumber")
-  @ApiOperation("根据楼栋Id和房屋门牌号获取房屋接口")
+  @GetMapping(value = "checkBuildingHouseNumber")
+  @ApiOperation("查询当前楼栋房屋门牌号是否可用接口")
   @ApiImplicitParams({
       @ApiImplicitParam(name = "buildingId", value = "楼栋Id", defaultValue = "2"),
       @ApiImplicitParam(name = "number", value = "房屋门牌号", defaultValue = "322")
   })
-  public Result getByBuildingUidAndNumber(@RequestParam Integer buildingId, @RequestParam Integer number) {
-    return houseService.getByBuildingIdAndNumber(buildingId, number);
+  public Result checkBuildingHouseNumber(@RequestParam Integer buildingId, Integer number) {
+    return houseService.checkBuildingHouseNumber(buildingId, number);
+  }
+
+  @GetMapping(value = "getAllHouses")
+  @ApiOperation("获取所有房屋")
+  public Result getAllHouses(){
+    return houseService.getAllHouses();
+  }
+
+  @GetMapping(value = "getUserAllHouses")
+  @ApiOperation("获取业主所有房屋并分页")
+  @ApiImplicitParams({
+      @ApiImplicitParam(name = "pageNum", value = "用户列表页码", defaultValue = "1"),
+      @ApiImplicitParam(name = "pageSize", value = "每页条数", defaultValue = "10"),
+      @ApiImplicitParam(name = "userId", value = "用户Id", defaultValue = "2")
+  })
+  public Result getUserAllHouses(@RequestParam Integer pageNum, Integer pageSize, Integer userId) {
+    return houseService.getUserAllHouses(pageNum - 1, pageSize, userId);
+  }
+
+  @PatchMapping(value = "updateOwner")
+  @ApiOperation("更新房屋业主")
+  public Result updateOwner(@RequestBody House house) {
+    int houseId = house.getId();
+    int userId = house.getUserId();
+    Result checkResult = houseFeeRecordService.checkHouseFeeClear(houseId);
+    if(checkResult.getData().equals(false)){
+      return checkResult;
+    } else {
+      return houseService.updateOwner(houseId, userId);
+    }
   }
 
 }

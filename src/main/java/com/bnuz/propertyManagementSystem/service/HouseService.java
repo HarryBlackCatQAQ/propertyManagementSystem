@@ -57,11 +57,34 @@ public interface HouseService {
   Result getById(Integer id);
 
   /**
-   * 根据楼栋Uid和门牌号查找房屋
+   * 检查当前楼栋房屋门牌号是否可用
    * @param buildingId
    * @param number
    * @return
    */
-  Result getByBuildingIdAndNumber(Integer buildingId, Integer number);
+  Result checkBuildingHouseNumber(Integer buildingId, Integer number);
+
+  /**
+   * 获取所有房屋
+   * @return
+   */
+  Result getAllHouses();
+
+  /**
+   * 根据业主Id获取所有房屋信息并分页
+   * @param pageNum
+   * @param pageSize
+   * @param userId
+   * @return
+   */
+  Result getUserAllHouses(Integer pageNum, Integer pageSize, Integer userId);
+
+  /**
+   * 更新房屋业主
+   * @param houseId
+   * @param userId
+   * @return
+   */
+  Result updateOwner(Integer houseId, Integer userId);
 
 }

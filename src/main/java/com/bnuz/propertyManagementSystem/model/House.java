@@ -53,4 +53,11 @@ public class House {
   @ApiModelProperty(value = "所属楼栋", hidden = true)
   private Building building; //所属楼栋
 
+  @ManyToOne
+  @JoinColumn(name = "userId", insertable = false ,updatable = false)
+  @JsonIgnore
+  @JsonBackReference
+  @ApiModelProperty(value = "所属用户", hidden = true)
+  private User user; //所属楼栋
+
 }

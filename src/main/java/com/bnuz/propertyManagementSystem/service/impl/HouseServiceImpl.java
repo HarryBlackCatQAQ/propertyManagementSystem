@@ -5,6 +5,7 @@ import com.bnuz.propertyManagementSystem.model.House;
 import com.bnuz.propertyManagementSystem.model.Result;
 import com.bnuz.propertyManagementSystem.model.ResultStatusCode;
 import com.bnuz.propertyManagementSystem.service.HouseService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -61,7 +62,7 @@ public class HouseServiceImpl implements HouseService {
   @Transactional(readOnly = true)
   public Result findAllByBuildingId(Integer pageNum, Integer pageSize, Integer buildingId) {
     Pageable pageable = PageRequest.of(pageNum, pageSize);
-    Page page = houseDao.findAllByBuildingId(pageable, buildingId);
+    Page page = houseDao.findAllByBuildingIdOrderByNumber(buildingId, pageable);
     return new Result(true, ResultStatusCode.OK, "查询成功", page);
   }
 
@@ -74,9 +75,35 @@ public class HouseServiceImpl implements HouseService {
 
   @Override
   @Transactional(readOnly = true)
-  public Result getByBuildingIdAndNumber(Integer buildingId, Integer number) {
+  public Result checkBuildingHouseNumber(Integer buildingId, Integer number) {
     House house = houseDao.getByBuildingIdAndNumber(buildingId, number);
-    return new Result(true, ResultStatusCode.OK, "查询成功", house);
+    if(house != null) {
+      return new Result(false, ResultStatusCode.OK, "房屋门牌号已存在");
+    }
+    return new Result(true, ResultStatusCode.OK, "房屋门牌号可用");
   }
 
+  @Override
+  @Transactional(readOnly = true)
+  public Result getAllHouses() {
+    List<House> houses = houseDao.findAll();
+    return new Result(true, ResultStatusCode.OK, "查询成功", houses);
+  }
+
+  @Override
+  public Result getUserAllHouses(Integer pageNum, Integer pageSize, Integer userId) {
+    Pageable pageable = PageRequest.of(pageNum, pageSize);
+    Page page = houseDao.findByUserIdOrderByNumber(userId, pageable);
+    return new Result(true, ResultStatusCode.OK, "查询成功", page);
+  }
+
+  @Override
+  public Result updateOwner(Integer houseId, Integer userId) {
+    synchronized (HouseServiceImpl.class) {
+      House house = houseDao.getById(houseId);
+      house.setUserId(userId);
+      houseDao.saveAndFlush(house);
+      return new Result(true, ResultStatusCode.OK, "更新成功", true);
+    }
+  }
 }

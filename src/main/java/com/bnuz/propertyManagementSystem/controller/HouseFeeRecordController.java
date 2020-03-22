@@ -28,15 +28,48 @@ public class HouseFeeRecordController {
         return houseFeeRecordService.getOwnerUnPayFeesList(userId, pageNum, pageSize);
     }
 
-    @GetMapping("/getPayFeesListByPayState")
-    @ApiOperation("根据支付状态获取物业费列表")
-    public Result getPayFeesListByPayState(int userId,int pageNum,int pageSize,int payState){
-        return  houseFeeRecordService.getPayFeesListByPayState(userId, pageNum, pageSize, payState);
+    @GetMapping("/searchOwnerTimeRangeFeesList")
+    @ApiOperation("搜索时间范围内数据列表")
+    public Result searchOwnerTimeRangeFeesList(int userId, int pageNum, int pageSize,
+        int fromYear, int fromMonth, int toYear, int toMonth) {
+        return houseFeeRecordService.searchOwnerTimeRangeFeesList(userId, pageNum, pageSize,
+            fromYear, fromMonth, toYear, toMonth);
     }
 
-    @GetMapping("/getAllPayFeesList")
-    @ApiOperation("获取所有物业费列表")
-    public Result getAllPayFeesList(int userId,int pageNum,int pageSize){
-        return houseFeeRecordService.getAllPayFeesList(userId, pageNum, pageSize);
+    @GetMapping("/searchUserBuildingFeesList")
+    @ApiOperation("搜索业主楼栋物业费列表")
+    public Result searchUserBuildingFeesList(int pageNum, int pageSize, int userId, int buildingId,
+        int fromYear, int fromMonth, int toYear, int toMonth) {
+        return houseFeeRecordService.searchUserBuildingFeesList(pageNum, pageSize, userId, buildingId,
+            fromYear, fromMonth, toYear, toMonth);
     }
+
+    @GetMapping("/searchBuildingFeesList")
+    @ApiOperation("搜索楼栋时间范围内物业费列表")
+    public Result searchBuildingFeesList(int pageNum, int pageSize, int buildingId,
+        int fromYear, int fromMonth, int toYear, int toMonth) {
+        return houseFeeRecordService.searchBuildingFeesList(pageNum, pageSize, buildingId,
+            fromYear, fromMonth, toYear, toMonth);
+    }
+
+    @GetMapping("/searchUserFeesList")
+    @ApiOperation("搜索用户时间范围内物业费列表")
+    public Result searchUserFeesList(int userId, int pageNum, int pageSize,
+        int fromYear, int fromMonth, int toYear, int toMonth) {
+        return houseFeeRecordService.searchUserFeesList(userId, pageNum, pageSize, fromYear, fromMonth, toYear, toMonth);
+    }
+
+    @GetMapping("/searchHouseFeesList")
+    @ApiOperation("搜索房屋时间范围内物业费列表")
+    public Result searchHouseFeesList(int pageNum, int pageSize, int houseId, int fromYear,
+        int fromMonth, int toYear, int toMonth){
+        return houseFeeRecordService.searchHouseFeesList(pageNum, pageSize, houseId, fromYear, fromMonth, toYear, toMonth);
+    }
+
+    @GetMapping("/checkHouseFeeClear")
+    @ApiOperation("检查房屋物业费是否缴清")
+    public Result checkHouseFeeClear(int houseId) {
+        return houseFeeRecordService.checkHouseFeeClear(houseId);
+    }
+
 }

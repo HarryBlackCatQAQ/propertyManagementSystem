@@ -5,6 +5,7 @@ import com.bnuz.propertyManagementSystem.model.Property;
 import com.bnuz.propertyManagementSystem.model.Result;
 import com.bnuz.propertyManagementSystem.model.ResultStatusCode;
 import com.bnuz.propertyManagementSystem.service.PropertyService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -59,6 +60,13 @@ public class PropertyServiceImpl implements PropertyService {
 
   @Override
   @Transactional(readOnly = true)
+  public Result getAllProperty() {
+    List<Property> properties = propertyDao.findAllByOrderByName();
+    return new Result(true, ResultStatusCode.OK, "查询成功", properties);
+  }
+
+  @Override
+  @Transactional(readOnly = true)
   public Result getFirst() {
     Property property = propertyDao.getFirstBy();
     return new Result(true, ResultStatusCode.OK, "查询成功", property);
@@ -82,9 +90,17 @@ public class PropertyServiceImpl implements PropertyService {
   @Transactional(readOnly = true)
   public Result getByName(String propertyName) {
     Property property = propertyDao.getByName(propertyName);
+    return new Result(true, ResultStatusCode.OK, "查询成功", property);
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public Result checkPropertyName(String propertyName) {
+    Property property = propertyDao.getByName(propertyName);
     if(property != null) {
       return new Result(false, ResultStatusCode.OK, "楼盘名字已存在");
     }
     return new Result(true, ResultStatusCode.OK, "楼盘名字可用");
   }
+
 }

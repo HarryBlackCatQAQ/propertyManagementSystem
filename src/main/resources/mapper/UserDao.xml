@@ -211,4 +211,9 @@
       `role` = #{role,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <update id="updateUserEmailAddress" parameterType="com.bnuz.propertyManagementSystem.model.User">
+    update user
+    set emailAddress = #{emailAddress,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

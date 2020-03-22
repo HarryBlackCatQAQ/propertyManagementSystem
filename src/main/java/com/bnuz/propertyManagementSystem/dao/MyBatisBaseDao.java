@@ -33,6 +33,8 @@ public interface MyBatisBaseDao<Model, PK extends Serializable, E> {
 
     int updateByPrimaryKey(Model record);
 
+    int updateUserEmailAddress(Model record);
+
 
     /**
      *降序

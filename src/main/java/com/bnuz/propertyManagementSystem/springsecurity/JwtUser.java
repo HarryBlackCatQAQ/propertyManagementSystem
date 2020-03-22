@@ -35,6 +35,8 @@ public class JwtUser extends User implements UserDetails {
         this.setPassword(user.getPassword());
         this.setNickname(user.getNickname());
         this.setId(user.getId());
+        this.setPhone(user.getPhone());
+        this.setEmailAddress(user.getEmailAddress());
 
 
         Collection<GrantedAuthority> authorities2 = new ArrayList<>();

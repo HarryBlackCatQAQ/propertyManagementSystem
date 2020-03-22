@@ -1,0 +1,33 @@
+package com.bnuz.propertyManagementSystem.dao;
+
+import com.bnuz.propertyManagementSystem.dto.HouseDto;
+import com.bnuz.propertyManagementSystem.model.House;
+import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+/**
+ * HouseDao继承基类
+ */
+@Repository
+public interface HouseDao extends JpaRepository<House, Integer> {
+
+  Page<House> findAll(Pageable pageable);
+
+  @Query("select new com.bnuz.propertyManagementSystem.dto.HouseDto(h.id, h.number, h.area, h.direction, h.floor, "
+      + "h.buildingId, h.userId, u.nickname) "
+      + "from House h left join User u on h.userId = u.id where h.buildingId = :buildingId order by h.number asc ")
+  Page<HouseDto> findAllByBuildingIdOrderByNumber(Integer buildingId, Pageable pageable);
+
+  House getById(Integer id);
+
+  House getByBuildingIdAndNumber(Integer buildingId, Integer number);
+
+  Page<House> findByUserIdOrderByNumber(Integer userId, Pageable pageable);
+
+  List<House> findAllByUserIdNotNull();
+
+}

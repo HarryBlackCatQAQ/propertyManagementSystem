@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bnuz.propertyManagementSystem.dao.LogFileDao">
+  <resultMap id="BaseResultMap" type="com.bnuz.propertyManagementSystem.model.LogFile">
+    <id column="log_file_id" jdbcType="INTEGER" property="id" />
+    <result column="log_file_level" jdbcType="INTEGER" property="level" />
+    <result column="log_file_fileName" jdbcType="VARCHAR" property="fileName" />
+    <result column="log_file_path" jdbcType="VARCHAR" property="path" />
+    <result column="log_file_isDir" jdbcType="INTEGER" property="isDir" />
+    <result column="log_file_preLevelName" jdbcType="VARCHAR" property="preLevelName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    log_file.id as log_file_id, log_file.`level` as `log_file_level`, log_file.fileName as log_file_fileName, 
+    log_file.`path` as `log_file_path`, log_file.isDir as log_file_isDir, log_file.preLevelName as log_file_preLevelName
+  </sql>
+  <select id="selectByExample" parameterType="com.bnuz.propertyManagementSystem.model.LogFileExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from log_file log_file
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from log_file log_file
+    where log_file.id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from log_file
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bnuz.propertyManagementSystem.model.LogFileExample">
+    delete from log_file log_file
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.bnuz.propertyManagementSystem.model.LogFile" useGeneratedKeys="true">
+    insert into log_file (`level`, fileName, `path`, 
+      isDir, preLevelName)
+    values (#{level,jdbcType=INTEGER}, #{fileName,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
+      #{isDir,jdbcType=INTEGER}, #{preLevelName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.bnuz.propertyManagementSystem.model.LogFile" useGeneratedKeys="true">
+    insert into log_file
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="level != null">
+        `level`,
+      </if>
+      <if test="fileName != null">
+        fileName,
+      </if>
+      <if test="path != null">
+        `path`,
+      </if>
+      <if test="isDir != null">
+        isDir,
+      </if>
+      <if test="preLevelName != null">
+        preLevelName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="fileName != null">
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="isDir != null">
+        #{isDir,jdbcType=INTEGER},
+      </if>
+      <if test="preLevelName != null">
+        #{preLevelName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bnuz.propertyManagementSystem.model.LogFileExample" resultType="java.lang.Long">
+    select count(*) from log_file log_file
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update log_file log_file
+    <set>
+      <if test="record.id != null">
+        log_file.id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.level != null">
+        log_file.`level` = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileName != null">
+        log_file.fileName = #{record.fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.path != null">
+        log_file.`path` = #{record.path,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDir != null">
+        log_file.isDir = #{record.isDir,jdbcType=INTEGER},
+      </if>
+      <if test="record.preLevelName != null">
+        log_file.preLevelName = #{record.preLevelName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update log_file log_file
+    set log_file.id = #{record.id,jdbcType=INTEGER},
+      log_file.`level` = #{record.level,jdbcType=INTEGER},
+      log_file.fileName = #{record.fileName,jdbcType=VARCHAR},
+      log_file.`path` = #{record.path,jdbcType=VARCHAR},
+      log_file.isDir = #{record.isDir,jdbcType=INTEGER},
+      log_file.preLevelName = #{record.preLevelName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bnuz.propertyManagementSystem.model.LogFile">
+    update log_file
+    <set>
+      <if test="level != null">
+        `level` = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="fileName != null">
+        fileName = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        `path` = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="isDir != null">
+        isDir = #{isDir,jdbcType=INTEGER},
+      </if>
+      <if test="preLevelName != null">
+        preLevelName = #{preLevelName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bnuz.propertyManagementSystem.model.LogFile">
+    update log_file
+    set `level` = #{level,jdbcType=INTEGER},
+      fileName = #{fileName,jdbcType=VARCHAR},
+      `path` = #{path,jdbcType=VARCHAR},
+      isDir = #{isDir,jdbcType=INTEGER},
+      preLevelName = #{preLevelName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

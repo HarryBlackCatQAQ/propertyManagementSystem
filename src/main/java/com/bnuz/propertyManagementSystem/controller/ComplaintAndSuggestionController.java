@@ -39,6 +39,19 @@ public class ComplaintAndSuggestionController {
         return complaintAndSuggestionSheetService.delComplaintAndSuggestionSheet(complaintAndSuggestionSheet);
     }
 
+    @GetMapping(value = "/queryByStateType")
+    @ApiOperation("根据状态获取投诉建议单")
+    public Result queryOwnerComplaintAndSuggestionSheetByType(String state,int pageNum,int size){
+        return complaintAndSuggestionSheetService.queryOwnerComplaintAndSuggestionSheetByType(state,pageNum,size);
+    }
+
+    @GetMapping(value = "/updateSheetById")
+    @ApiOperation("根据申请单ID更新申请单状态(已解决)")
+    public Result updateComplaintAndSuggestionSheetById(int id,String nickName){
+        return complaintAndSuggestionSheetService.updateComplaintAndSuggestionSheetById(id,nickName);
+    }
+
+
     @PostMapping(value = "/update")
     public Result updateComplaintAndSuggestionSheet(){
         return new Result();

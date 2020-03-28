@@ -30,4 +30,11 @@ public class ComplaintAndSuggestionTimeLineController {
         return complaintAndSuggestionTimeLineService.createComplaintAndSuggestionSheetTimeLine(complaintAndSuggestionSheetTimeline);
     }
 
+    @PostMapping(value ="/update")
+    @ApiOperation("投诉建议申请单回馈")
+    public Result updateComplaintAndSuggestionSheetTimeLine(@RequestBody ComplaintAndSuggestionSheetTimeline complaintAndSuggestionSheetTimeline){
+
+        return complaintAndSuggestionTimeLineService.updateComplaintAndSuggestionSheetTimeLine(complaintAndSuggestionSheetTimeline);
+    }
+
 }

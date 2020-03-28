@@ -2,10 +2,7 @@ package com.bnuz.propertyManagementSystem.dao;
 
 import com.bnuz.propertyManagementSystem.model.ComplaintAndSuggestionSheet;
 import com.bnuz.propertyManagementSystem.model.ComplaintAndSuggestionSheetExample;
-import org.apache.ibatis.annotations.Many;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,11 +14,20 @@ import java.util.List;
 public interface ComplaintAndSuggestionSheetDao extends MyBatisBaseDao<ComplaintAndSuggestionSheet, Integer, ComplaintAndSuggestionSheetExample> {
 
     @Select("SELECT * FROM complaint_and_suggestion_sheet where proprietorId = #{proprietorId}")
-    @Results({
+    @Results(id="sheetMap" ,value = {
             @Result(column = "id",property = "imageList",
                     many = @Many(select = "com.bnuz.propertyManagementSystem.dao.ComplaintAndSuggestionSheetImageDao.selectComplaintAndSuggestionSheetImageBySheetId")),
             @Result(column = "id",property = "timelineList",
                     many = @Many(select = "com.bnuz.propertyManagementSystem.dao.ComplaintAndSuggestionSheetTimelineDao.selectComplaintAndSuggestionSheetTimelineBySheetId"))
     })
     public List<ComplaintAndSuggestionSheet> selectUserComplaintAndSuggestionSheetListByUserId(int proprietorId);
+
+    @Select("SELECT * FROM complaint_and_suggestion_sheet where state = #{state}")
+    @ResultMap(value = "sheetMap")
+    public List<ComplaintAndSuggestionSheet> selectUserComplaintAndSuggestionSheetListByState(String state);
+
+    @Select("SELECT * FROM complaint_and_suggestion_sheet")
+    @ResultMap(value = "sheetMap")
+    public List<ComplaintAndSuggestionSheet> selectUserComplaintAndSuggestionSheetList();
+
 }

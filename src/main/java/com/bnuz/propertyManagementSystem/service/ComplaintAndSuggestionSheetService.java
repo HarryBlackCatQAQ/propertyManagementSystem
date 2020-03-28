@@ -10,6 +10,10 @@ public interface ComplaintAndSuggestionSheetService {
 
     public Result delComplaintAndSuggestionSheet(ComplaintAndSuggestionSheet complaintAndSuggestionSheet);
 
+    public Result queryOwnerComplaintAndSuggestionSheetByType(String state,int pageNum,int size);
+
+    public Result updateComplaintAndSuggestionSheetById(int id,String nickName);
+
     public Result updateComplaintAndSuggestionSheet();
 
     public Result queryComplaintAndSuggestionSheetByRoot();

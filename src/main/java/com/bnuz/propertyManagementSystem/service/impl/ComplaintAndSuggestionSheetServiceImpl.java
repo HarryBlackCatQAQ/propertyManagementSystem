@@ -87,6 +87,41 @@ public class ComplaintAndSuggestionSheetServiceImpl implements ComplaintAndSugge
     }
 
     @Override
+    public Result queryOwnerComplaintAndSuggestionSheetByType(String state, int pageNum, int size) {
+        PageHelper.startPage(pageNum,size);
+        PageHelper.orderBy( "submitTime " + MyBatisBaseDao.DESC);
+        List<ComplaintAndSuggestionSheet> list;
+        if(!state.equals("all")){
+            list = complaintAndSuggestionSheetDao.selectUserComplaintAndSuggestionSheetListByState(state);
+        }
+        else{
+            list = complaintAndSuggestionSheetDao.selectUserComplaintAndSuggestionSheetList();
+        }
+//        System.err.println(list);
+
+        PageInfo<ComplaintAndSuggestionSheet> page = new PageInfo<ComplaintAndSuggestionSheet>(list);
+        return new Result(true,ResultStatusCode.OK,"查询成功!",page);
+    }
+
+    @Override
+    public Result updateComplaintAndSuggestionSheetById(int id,String nickName){
+        Date now = dateUtil.getNow();
+
+        ComplaintAndSuggestionSheetTimeline timeLine = new ComplaintAndSuggestionSheetTimeline();
+        timeLine.setSheetId(id);
+        timeLine.setMessage(ComplaintAndSuggestionSheetService.COMPLETE);
+        timeLine.setProcessingTime(now);
+        timeLine.setProcessingUserNickName(nickName);
+        complaintAndSuggestionSheetTimelineDao.insert(timeLine);
+
+        ComplaintAndSuggestionSheet complaintAndSuggestionSheet = complaintAndSuggestionSheetDao.selectByPrimaryKey(id);
+        complaintAndSuggestionSheet.setState(ComplaintAndSuggestionSheetService.COMPLETE);
+        complaintAndSuggestionSheet.setProcessingTime(now);
+        complaintAndSuggestionSheetDao.updateByPrimaryKey(complaintAndSuggestionSheet);
+        return new Result(true,ResultStatusCode.OK,"申请单更新成功!");
+    }
+
+    @Override
     public Result updateComplaintAndSuggestionSheet() {
         return null;
     }

@@ -6,4 +6,6 @@ import com.bnuz.propertyManagementSystem.model.Result;
 public interface ComplaintAndSuggestionTimeLineService {
 
     public Result createComplaintAndSuggestionSheetTimeLine(ComplaintAndSuggestionSheetTimeline complaintAndSuggestionSheetTimeline);
+
+    public Result updateComplaintAndSuggestionSheetTimeLine(ComplaintAndSuggestionSheetTimeline complaintAndSuggestionSheetTimeline);
 }

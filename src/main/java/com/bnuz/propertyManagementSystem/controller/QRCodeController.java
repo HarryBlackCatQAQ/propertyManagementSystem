@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/QRcode")
-@Api("二维码相关接口")
+@Api(tags = "二维码相关接口")
 @Slf4j
 public class QRCodeController {
 

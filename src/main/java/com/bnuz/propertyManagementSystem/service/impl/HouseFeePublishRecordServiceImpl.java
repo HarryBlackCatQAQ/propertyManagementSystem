@@ -87,7 +87,7 @@ public class HouseFeePublishRecordServiceImpl implements HouseFeePublishRecordSe
             HouseFeeRecord result = houseFeeRecordDao.saveAndFlush(record);
             HouseFeeRecord flag = houseFeeRecordDao.getByOutTradeNo(result.getOutTradeNo());
             String emailAddress = house.getUser().getEmailAddress();
-            if(emailAddress.length() != 0) {
+            if(emailAddress != null && emailAddress.length() != 0) {
               List<Map<String, String>> userList = new ArrayList<>();
               if (map.containsKey(emailAddress)) {
                 userList = map.get(emailAddress);

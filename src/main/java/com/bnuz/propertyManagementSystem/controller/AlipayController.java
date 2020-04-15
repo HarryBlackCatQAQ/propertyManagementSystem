@@ -24,7 +24,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/alipay")
-@Api("支付宝支付相关接口")
+@Api(tags = "支付宝支付相关接口")
 public class AlipayController {
 
     @Autowired
